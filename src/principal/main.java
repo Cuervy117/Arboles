@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package principal;
-
+import AVL.*;
 /**
  *
  * @author David
  */
 public class main {
-    
+    public static void main(String[] args) {
+        Node nodo1 = new Node.NodeBuilder().set_key(12).build();
+        System.out.println(nodo1.getClave());
+    }
 }
