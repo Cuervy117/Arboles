@@ -11,7 +11,7 @@ package AVL;
 public class Node {
     private int key;
     
-    private Node patern = null;
+    private Node parent = null;
     private Node left_child = null;
     private Node right_child = null;
     
@@ -20,7 +20,7 @@ public class Node {
     }
     
     public boolean isRoot(){
-        return patern == null ? true : false;
+        return parent == null ? true : false;
     }
 
     public int getClave() {
@@ -31,12 +31,12 @@ public class Node {
         this.key = key;
     }
 
-    public Node getPatern() {
-        return patern;
+    public Node getParent() {
+        return parent;
     }
 
-    public void setPatern(Node patern) {
-        this.patern = patern;
+    public void setParent(Node patern) {
+        this.parent = patern;
     }
 
     public Node getLeft_child() {
@@ -72,8 +72,8 @@ public class Node {
             return this;
         }
         
-        public NodeBuilder set_patern(Node node){
-            this.node.setPatern(node);
+        public NodeBuilder set_parent(Node node){
+            this.node.setParent(node);
             return this;
         }
         
