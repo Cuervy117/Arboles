@@ -24,30 +24,30 @@ public class ArbolAVL {
         return root;
     }
     
-    public void insert(Node node){
+    public void add(Node node){
         Node rootAux = root;
         if(root == null){
             this.root = node;
             return;
         }
-        if(root == node){
-            return;
-        }else{
-            while(true){
-                if(node.getClave() < rootAux.getClave()){
-                    if(rootAux.getRight_child() != null){
-                        rootAux = rootAux.getRight_child();
-                    }else{
-                        rootAux.getRight_child().setRight_child(node);
-                        break;
-                    }
-                }else if(node.getClave() > rootAux.getClave()){
-                    
+        while(true){
+            if(rootAux.getClave() == node.getClave()) break;
+            else if(node.getClave() > rootAux.getClave()){
+                if(rootAux.getRight_child() != null){
+                    rootAux = rootAux.getRight_child();
+                }else{
+                    rootAux.setRight_child(node);
+                    break;
                 }
+            }else{
+                if(rootAux.getLeft_child() != null){
+                    rootAux = rootAux.getLeft_child();
+                }else{
+                    rootAux.setLeft_child(node);
+                    break;
+                }                    
             }
         }
-        
-        
     }
     
     public static void preOrder(Node node){

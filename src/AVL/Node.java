@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package AVL;
-
+import java.math.*;
 /**
  *
  * @author David
@@ -55,5 +55,12 @@ public class Node {
 
     public void setRight_child(Node right_child) {
         this.right_child = right_child;
+    }
+    
+    public int getHeight(){
+        if(this.isLeaf())return 0;
+        else{
+            return 1 + Math.max(this.right_child != null ? this.right_child.getHeight() : -1,this.left_child != null ? this.left_child.getHeight() : -1);
+        }
     }
 }
