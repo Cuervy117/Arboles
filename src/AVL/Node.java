@@ -9,34 +9,36 @@ package AVL;
  * @author David
  */
 public class Node {
-    private int key;
     
-    private Node parent = null;
-    private Node left_child = null;
-    private Node right_child = null;
+    private int key;
+    private Node left_child;
+    private Node right_child; 
+    private int weight;
+    
+    public Node(){
+        this.key = 0;
+        this.weight = 0;
+        this.left_child = null;
+        this.right_child = null;
+    }
+    
+    public Node(int key){
+        this.key = key;
+        this.weight = 0;
+        this.left_child = null;
+        this.right_child = null;
+    }
     
     public boolean isLeaf(){
         return (left_child == null) && (right_child == null) ? true : false;
     }
     
-    public boolean isRoot(){
-        return parent == null ? true : false;
-    }
-
     public int getClave() {
         return key;
     }
 
     public void setKey(int key) {
         this.key = key;
-    }
-
-    public Node getParent() {
-        return parent;
-    }
-
-    public void setParent(Node patern) {
-        this.parent = patern;
     }
 
     public Node getLeft_child() {
@@ -53,39 +55,5 @@ public class Node {
 
     public void setRight_child(Node right_child) {
         this.right_child = right_child;
-    }
-    
-    public static final class NodeBuilder{
-        private Node node;
-        
-        public NodeBuilder(){
-            this.node = new Node();
-        }
-        
-        public NodeBuilder set_left_child(Node node){
-            this.node.setLeft_child(node);
-            return this;
-        }
-        
-        public NodeBuilder set_right_child(Node node){
-            this.node.setRight_child(node);
-            return this;
-        }
-        
-        public NodeBuilder set_parent(Node node){
-            this.node.setParent(node);
-            return this;
-        }
-        
-        public NodeBuilder set_key(int key){
-            this.node.setKey(key);
-            return this;
-        }
-        
-        public Node build(){
-            Node nodeAux = this.node;
-            this.node = new Node();
-            return nodeAux;
-        }
     }
 }
