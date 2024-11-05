@@ -10,12 +10,18 @@ package AVL;
  */
 public class ArbolAVL {
     private Node root;
+    private int left_depth;
+    private int right_depth;
     
     public ArbolAVL(){
+        left_depth = -1;
+        right_depth = -1;
     }
     
     public ArbolAVL(Node root){
         this.root = root;
+        left_depth = 0;
+        right_depth = 0;
     }
     
     public Node getRoot(){
@@ -25,11 +31,15 @@ public class ArbolAVL {
     public void insert(Node node){
         if(root == null){
             root = node;
+            left_depth = right_depth = 0;
         }else{
+            int newRight_depth = 0;
+            int newLeft_depth = 0;
             int key = node.getClave();
             Node rootAux = root;
             while(true){
                 if(key < rootAux.getClave()){
+                    
                     if(rootAux.getLeft_child() == null){
                         node.setParent(rootAux);
                         rootAux.setLeft_child(node);
@@ -59,4 +69,6 @@ public class ArbolAVL {
         preOrder(node.getLeft_child());
         preOrder(node.getRight_child());
     }
+    
+    
 }
