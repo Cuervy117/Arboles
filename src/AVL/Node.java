@@ -60,11 +60,12 @@ public class Node {
     public int getHeight(){
         if(this.isLeaf())return 0;
         else{
-            return 1 + Math.max(this.right_child != null ? this.right_child.getHeight() : -1,this.left_child != null ? this.left_child.getHeight() : -1);
+            return 1 + Math.max(right_child != null ? right_child.getHeight() : -1,
+                    left_child != null ? left_child.getHeight() : -1);
         }
     }
     
     public int getWeight(){
-        return this.right_child.getHeight() - this.left_child.getHeight();
+        return (right_child != null ? right_child.getHeight() : 0) - (left_child != null ? left_child.getHeight() : 0);
     }
 }
