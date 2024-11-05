@@ -25,6 +25,7 @@ public class main {
         arbol.add(node8);
         arbol.add(node9);
         System.out.println(node1.getHeight());
+        System.out.println(node1.getWeight());
         //ArbolAVL.preOrder(arbol.getRoot());
     }
 }

@@ -63,4 +63,8 @@ public class Node {
             return 1 + Math.max(this.right_child != null ? this.right_child.getHeight() : -1,this.left_child != null ? this.left_child.getHeight() : -1);
         }
     }
+    
+    public int getWeight(){
+        return this.right_child.getHeight() - this.left_child.getHeight();
+    }
 }
