@@ -50,6 +50,11 @@ public class ArbolAVL {
                 }                    
             }
         }
+        System.out.println("Arbol sin estructurar");
+        ArbolAVL.preOrder(this.getRoot());
+        this.restructuring();
+        System.out.println("Arbol estructurado");
+        ArbolAVL.preOrder(this.getRoot());
     }
     
     public static void preOrder(Node node){
@@ -62,6 +67,7 @@ public class ArbolAVL {
     }
     
     public void simple_right_rotation(Node node){
+        if(node == null) return;
         Node child = node.getLeft_child();
         if(child == null)return;
         
@@ -80,6 +86,7 @@ public class ArbolAVL {
     }
     
     public void simple_left_rotation(Node node){
+        if(node == null) return;
         Node child = node.getRight_child();
         if(child == null) return;
         
@@ -107,15 +114,38 @@ public class ArbolAVL {
         this.simple_left_rotation(node);
     }
     
-    public boolean balanced(Node node){
-        if(node == null){
-            return true;
+    public Node balanced(Node node){
+        if(node == null) return null;
+        int actualWeight = node.getWeight();
+        if(actualWeight > 1 || actualWeight < -1) return node;
+        else{ 
+            Node left_child = balanced(node.getLeft_child());
+            if(left_child != null) return left_child;
+            Node right_child = balanced(node.getRight_child());
+            if( right_child != null) return right_child;
+            return null; 
         }
-        if(node.getWeight() < 2 && node.getWeight() > -2){
-            boolean left = this.balanced(node.getLeft_child());
-            boolean right = this.balanced(node.getRight_child());
-            if(left && right)return true;
-            else return false;
-        }else return false;
+    }
+
+    public void restructuring(){
+        Node inbalanced;
+        do {
+            inbalanced = this.balanced(this.getRoot()); 
+            if(inbalanced != null){
+                if(inbalanced.getWeight() < -1){
+                    if(inbalanced.getLeft_child().getWeight() < 0){
+                        this.simple_right_rotation(inbalanced);
+                    }else{
+                        this.double_right_rotation(inbalanced); 
+                    }
+                }else if(inbalanced.getWeight() > 1){
+                    if(inbalanced.getRight_child().getWeight() > 0){
+                        this.simple_left_rotation(inbalanced);
+                    }else{
+                        this.double_left_rotation(inbalanced);
+                    }
+                }
+            }
+        } while (inbalanced != null);
     }
 }
