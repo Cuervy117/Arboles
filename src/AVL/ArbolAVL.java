@@ -106,4 +106,16 @@ public class ArbolAVL {
         this.simple_right_rotation(node.getRight_child());
         this.simple_left_rotation(node);
     }
+    
+    public boolean balanced(Node node){
+        if(node == null){
+            return true;
+        }
+        if(node.getWeight() < 2 && node.getWeight() > -2){
+            boolean left = this.balanced(node.getLeft_child());
+            boolean right = this.balanced(node.getRight_child());
+            if(left && right)return true;
+            else return false;
+        }else return false;
+    }
 }
