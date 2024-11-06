@@ -127,25 +127,25 @@ public class ArbolAVL implements Serializable{
     }
 
     public void restructuring(){
-        Node inbalanced;
+        Node unbalanced;
         do {
-            inbalanced = balanced(this.getRoot()); 
-            if(inbalanced != null){
-                if(inbalanced.getWeight() < -1){
-                    if(inbalanced.getLeft_child().getWeight() < 0){
-                        this.simple_right_rotation(inbalanced);
+            unbalanced = balanced(this.getRoot()); 
+            if(unbalanced != null){
+                if(unbalanced.getWeight() < -1){
+                    if(unbalanced.getLeft_child().getWeight() < 0){
+                        this.simple_right_rotation(unbalanced);
                     }else{
-                        this.double_right_rotation(inbalanced); 
+                        this.double_right_rotation(unbalanced); 
                     }
-                }else if(inbalanced.getWeight() > 1){
-                    if(inbalanced.getRight_child().getWeight() > 0){
-                        this.simple_left_rotation(inbalanced);
+                }else if(unbalanced.getWeight() > 1){
+                    if(unbalanced.getRight_child().getWeight() > 0){
+                        this.simple_left_rotation(unbalanced);
                     }else{
-                        this.double_left_rotation(inbalanced);
+                        this.double_left_rotation(unbalanced);
                     }
                 }
             }
-        } while (inbalanced != null);
+        } while (unbalanced != null);
     }
 
     public void guardarArbol(String filePath) {
