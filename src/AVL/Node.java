@@ -13,6 +13,7 @@ public class Node {
     private int key;
     private Node left_child;
     private Node right_child; 
+    private Node parent;
     private int weight;
     
     public Node(){
@@ -57,6 +58,13 @@ public class Node {
         this.right_child = right_child;
     }
     
+    public Node getParent(){
+        return parent;
+    }
+    
+    public void setParent(Node parent){
+        this.parent = parent;
+    }
     public int getHeight(){
         if(this.isLeaf())return 0;
         else{

@@ -24,8 +24,10 @@ public class main {
         arbol.add(node7);
         arbol.add(node8);
         arbol.add(node9);
-        System.out.println(node1.getHeight());
-        System.out.println(node1.getWeight());
-        //ArbolAVL.preOrder(arbol.getRoot());
+        ArbolAVL.preOrder(arbol.getRoot());
+        arbol.simple_right_rotation(node6);
+        System.out.println("Rotacion hecha");
+        ArbolAVL.preOrder(arbol.getRoot());
+
     }
 }
