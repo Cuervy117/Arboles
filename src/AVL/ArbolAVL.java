@@ -64,19 +64,46 @@ public class ArbolAVL {
     public void simple_right_rotation(Node node){
         Node child = node.getLeft_child();
         if(child == null)return;
-        if(node == root){
-            root = child;
-            node.setLeft_child(child.getRight_child());
-            child.setRight_child(node);
-        }else{
+        
         Node parent = node.getParent();
+        
         node.setLeft_child(child.getRight_child());
-        if(node == parent.getLeft_child())parent.setLeft_child(child);
-        else parent.setRight_child(child);
+        if(child.getRight_child() != null) child.getRight_child().setParent(node);
+        
         child.setParent(parent);
+        if(parent == null)root = child;
+        else if(node == parent.getLeft_child()) parent.setLeft_child(child);
+        else parent.setRight_child(child);
+        
         child.setRight_child(node);
         node.setParent(child);
-        }
     }
     
+    public void simple_left_rotation(Node node){
+        Node child = node.getRight_child();
+        if(child == null) return;
+        
+        Node parent = node.getParent();
+        
+        node.setRight_child(child.getLeft_child());
+        if(child.getLeft_child() != null) child.getLeft_child().setParent(node);
+        
+        child.setParent(parent);
+        if(parent == null)root = child;
+        else if(node == parent.getLeft_child()) parent.setLeft_child(child);
+        else parent.setRight_child(child);
+        
+        child.setLeft_child(node);
+        node.setParent(child);
+    }
+    
+    public void double_right_rotation(Node node){
+        this.simple_left_rotation(node.getLeft_child());
+        this.simple_right_rotation(node);
+    }
+    
+    public void double_left_rotation(Node node){
+        this.simple_right_rotation(node.getRight_child());
+        this.simple_left_rotation(node);
+    }
 }
