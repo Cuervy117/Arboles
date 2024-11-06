@@ -4,16 +4,19 @@
  */
 package AVL;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 /**
  *
  * @author David
  */
-public class ArbolAVL {
+public class ArbolAVL implements Serializable{
     private Node root;
-
     
     public ArbolAVL(){
-
     }
     
     public ArbolAVL(Node root){
@@ -50,11 +53,7 @@ public class ArbolAVL {
                 }                    
             }
         }
-        System.out.println("Arbol sin estructurar");
-        ArbolAVL.preOrder(this.getRoot());
         this.restructuring();
-        System.out.println("Arbol estructurado");
-        ArbolAVL.preOrder(this.getRoot());
     }
     
     public static void preOrder(Node node){
@@ -114,7 +113,7 @@ public class ArbolAVL {
         this.simple_left_rotation(node);
     }
     
-    public Node balanced(Node node){
+    public static Node balanced(Node node){
         if(node == null) return null;
         int actualWeight = node.getWeight();
         if(actualWeight > 1 || actualWeight < -1) return node;
@@ -130,7 +129,7 @@ public class ArbolAVL {
     public void restructuring(){
         Node inbalanced;
         do {
-            inbalanced = this.balanced(this.getRoot()); 
+            inbalanced = balanced(this.getRoot()); 
             if(inbalanced != null){
                 if(inbalanced.getWeight() < -1){
                     if(inbalanced.getLeft_child().getWeight() < 0){
@@ -147,5 +146,15 @@ public class ArbolAVL {
                 }
             }
         } while (inbalanced != null);
+    }
+
+    public void guardarArbol(String filePath) {
+        try (FileOutputStream fileOut = new FileOutputStream(filePath);
+                ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(this);
+            System.out.println("Árbol guardado exitosamente en " + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

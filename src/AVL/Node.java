@@ -3,11 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package AVL;
+
+import java.io.Serializable;
+
 /**
  *
  * @author David
  */
-public class Node {
+public class Node implements Serializable{
     
     private int key;
     private Node left_child;
