@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
+import arbolBinario.Nodo;
+
 public class Menu {
     public static ArbolExp arbol = null;
 
-    public static void desplegarMenu() {
-        Scanner scanner = new Scanner(System.in);
+    public static void arbolAritmetico(Scanner scanner) {
         int opcion;
 
         do {
@@ -22,7 +23,7 @@ public class Menu {
             scanner.nextLine();
 
             switch (opcion) {
-                case 1 -> ingresarExpresion();
+                case 1 -> ingresarExpresion(scanner);
                 case 2 -> mostrarArbol();
                 case 3 -> resolverExpresion();
                 case 4 -> System.out.println("Saliendo...");
@@ -33,8 +34,7 @@ public class Menu {
         scanner.close();
     }
 
-    public static void ingresarExpresion() {
-        Scanner scanner = new Scanner(System.in);
+    public static void ingresarExpresion(Scanner scanner) {
         System.out.print("Ingrese la expresión matemática (separada por espacios): ");
         String expresion = scanner.nextLine();
         String[] elementos = expresion.split(" ");
@@ -43,28 +43,28 @@ public class Menu {
     }
 
     public static void mostrarArbol() {
-        if (arbol == null || arbol.root == null) {
+        if (arbol == null || arbol.getRoot() == null) {
             System.out.println("No se ha ingresado una expresión aún");
             return;
         }
 
         System.out.println("Árbol en notación prefija:");
-        arbol.notPrefija(arbol.root);
+        arbol.notPrefija(arbol.getRoot());
 
         System.out.println("\nÁrbol en notación infija:");
-        arbol.notInfija(arbol.root);
+        arbol.notInfija(arbol.getRoot());
 
         System.out.println("\nÁrbol en notación postfija:");
-        arbol.notPostfija(arbol.root);
+        arbol.notPostfija(arbol.getRoot());
     }
 
     public static void resolverExpresion() {
-        if (arbol == null || arbol.root == null) {
+        if (arbol == null || arbol.getRoot() == null) {
             System.out.println("No se ha ingresado una expresión aún");
             return;
         }
 
-        List<String> rpn = obtenerRPN(arbol.root);
+        List<String> rpn = obtenerRPN(arbol.getRoot());
         System.out.println("Reverse Polish Notation: " + String.join(" ", rpn));
         double resultado = resolverConRPN(rpn);
         System.out.println("Resultado de la expresión: " + resultado);

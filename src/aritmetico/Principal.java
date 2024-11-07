@@ -1,7 +1,10 @@
 package aritmetico;
 
+import java.util.Scanner;
+
 public class Principal {
     public static void main(String[] args) {
-        Menu.desplegarMenu();
+        Scanner sc = new Scanner(System.in);
+        Menu.arbolAritmetico(sc);
     }
 }

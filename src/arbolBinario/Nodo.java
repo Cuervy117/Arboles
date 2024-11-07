@@ -1,4 +1,4 @@
-package aritmetico;
+package arbolBinario;
 
 public class Nodo {
     

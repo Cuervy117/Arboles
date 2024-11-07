@@ -1,8 +1,7 @@
-package aritmetico;
-
+package arbolBinario;
 
 public class ArbolBin {
-    Nodo root;
+    protected Nodo root;
     
     public ArbolBin(){
         root=null;
@@ -14,6 +13,10 @@ public class ArbolBin {
     
     public ArbolBin(Nodo root){
         this.root=root;
+    }
+
+    public Nodo getRoot(){
+        return root;
     }
     
     public void add(Nodo padre, Nodo hijo, int lado){

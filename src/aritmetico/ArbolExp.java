@@ -2,6 +2,8 @@ package aritmetico;
 
 import java.util.List;
 import java.util.Stack;
+import arbolBinario.ArbolBin;
+import arbolBinario.Nodo;
 
 public class ArbolExp extends ArbolBin {
     private static final List<String> operadores = List.of("+", "-", "*", "/");
