@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package aritmetico;
+
 import java.util.List;
 import java.util.Stack;
 

@@ -1,5 +1,5 @@
-import java.util.LinkedList;
-import java.util.Queue;
+package aritmetico;
+
 
 public class ArbolBin {
     Nodo root;

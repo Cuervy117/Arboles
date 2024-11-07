@@ -1,3 +1,5 @@
+package aritmetico;
+
 public class Nodo {
     
     String valor;
