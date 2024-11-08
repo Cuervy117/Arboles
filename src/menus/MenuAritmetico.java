@@ -1,4 +1,4 @@
-package aritmetico;
+package menus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,19 +6,24 @@ import java.util.Scanner;
 import java.util.Stack;
 
 import arbolBinario.Nodo;
+import aritmetico.ArbolExp;
 
-public class Menu {
+public class MenuAritmetico implements Menu{
     public static ArbolExp arbol;
 
-    public static void arbolAritmetico(Scanner scanner) {
+    public static void opciones(){
+        System.out.println("Seleccione una opción: ");
+        System.out.println("1. Ingresar expresión");
+        System.out.println("2. Mostrar árbol");
+        System.out.println("3. Resolver expresión");
+        System.out.println("4. Salir");
+    }
+
+    public static void ejecutarMenu(Scanner scanner) {
         int opcion;
 
         do {
-            System.out.println("Seleccione una opción: ");
-            System.out.println("1. Ingresar expresión");
-            System.out.println("2. Mostrar árbol");
-            System.out.println("3. Resolver expresión");
-            System.out.println("4. Salir");
+            opciones();
             opcion = scanner.nextInt();
             scanner.nextLine();
 
