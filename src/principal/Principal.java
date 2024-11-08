@@ -2,6 +2,7 @@ package principal;
 import java.util.ArrayList;
 
 import AVL.*;
+import arbolBinario.Nodo;
 import archivos.*;
 /**
  *
@@ -28,13 +29,13 @@ public class Principal {
         ArbolAVL.preOrder(arboles.get(0).getRoot());
         Archivos.guardarDatos(arboles);*/
         ArbolAVL<Integer> nuevoArbol = new ArbolAVL<>(new NodeAVL<>(20));
-        nuevoArbol.add(new NodeAVL<>(15));
-        nuevoArbol.add(new NodeAVL<>(10));
-        nuevoArbol.add(new NodeAVL<>(12));
-        nuevoArbol.add(new NodeAVL<>(25));
-        nuevoArbol.add(new NodeAVL<>(30));
-        nuevoArbol.add(new NodeAVL<>(28));
-        ArbolAVL.preOrder(nuevoArbol.getRoot());
+        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(15));
+        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(10));
+        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(12));
+        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(25));
+        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(30));
+        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(28));
+        ArbolAVL.preOrder(nuevoArbol.getAVLRoot());
         // Guardar el árbol en la base de datos
         ArrayList<ArbolAVL<Integer>> arboles = new ArrayList<>();
         arboles.add(nuevoArbol);
@@ -47,7 +48,7 @@ public class Principal {
         // Verificar el árbol cargado
         if (!arboles.isEmpty()) {
             ArbolAVL<Integer> arbolCargado = arboles.get(0);
-            ArbolAVL.preOrder(arbolCargado.getRoot()); // Recorrer el árbol en preorden
+            ArbolAVL.preOrder(arbolCargado.getAVLRoot()); // Recorrer el árbol en preorden
         } else {
             System.out.println("No se pudo cargar el árbol desde la base de datos.");
         }

@@ -28,9 +28,9 @@ public class ArbolBin<T extends Comparable<T>> implements Serializable {
             return;
         }
         while(true){
-            int compracion = nodo.getClave().compareTo(rootAux.getClave());
-            if(rootAux.getClave() == nodo.getClave()) break;
-            else if(compracion > 0){
+            int comparacion = nodo.getClave().compareTo(rootAux.getClave());
+            if(comparacion == 0) break;
+            else if(comparacion > 0){
                 if(rootAux.getHijoDerecho() != null){
                     rootAux = rootAux.getHijoDerecho();
                 }else{

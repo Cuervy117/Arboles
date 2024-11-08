@@ -26,8 +26,8 @@ public class Nodo<T> implements Serializable{
         this.hijoDerecho = nodoHijo;
     }
 
-    public void setValor(T valor){
-        this.clave = valor;
+    public void setClave(T clave){
+        this.clave = clave;
     }
 
     public Nodo<T> getHijoIzquierdo() {

@@ -12,9 +12,9 @@ import arbolBinario.*;
 public class NodeAVL<T> extends Nodo<T>{
     private static final long serialVersionUID = 123456789L;
 
-    private NodeAVL<T> leftChild;
-    private NodeAVL<T> rightChild; 
-    private NodeAVL<T> parent;
+    private NodeAVL<T> hijoIzquierdo;
+    private NodeAVL<T> hijoDerecho; 
+    private NodeAVL<T> padre;
     
     public NodeAVL(){
 
@@ -25,7 +25,7 @@ public class NodeAVL<T> extends Nodo<T>{
     }
     
     public boolean isLeaf(){
-        return (leftChild == null) && (rightChild == null) ? true : false;
+        return (hijoIzquierdo == null) && (hijoDerecho == null) ? true : false;
     }
     
     public T getClave() {
@@ -36,39 +36,40 @@ public class NodeAVL<T> extends Nodo<T>{
         this.clave = clave;
     }
 
-    public NodeAVL<T> getLeftChild() {
-        return leftChild;
+    public NodeAVL<T> getHijoIzquierdo() {
+        return hijoIzquierdo;
     }
 
-    public void setLeftChild(NodeAVL<T> leftChild) {
-        this.leftChild = leftChild;
+    public void setHijoIzquierdo(NodeAVL<T> hijoIzquierdo) {
+        this.hijoIzquierdo = hijoIzquierdo;
     }
 
-    public NodeAVL<T> getRightChild() {
-        return rightChild;
+    public NodeAVL<T> getHijoDerecho() {
+        return hijoDerecho;
     }
 
-    public void setRightChild(NodeAVL<T> rightChild) {
-        this.rightChild = rightChild;
+    public void setHijoDerecho(NodeAVL<T> hijoDerecho) {
+        this.hijoDerecho = hijoDerecho;
     }
     
-    public NodeAVL<T> getParent(){
-        return parent;
+    public NodeAVL<T> getPadre(){
+        return padre;
     }
     
-    public void setParent(NodeAVL<T> parent){
-        this.parent = parent;
+    public void setPadre(NodeAVL<T> padre){
+        this.padre = padre;
     }
+    
     public int getHeight(){
         if(this.isLeaf())return 0;
         else{
-            return 1 + Math.max(rightChild != null ? rightChild.getHeight() : -1,
-                    leftChild != null ? leftChild.getHeight() : -1);
+            return 1 + Math.max(hijoDerecho != null ? hijoDerecho.getHeight() : -1,
+                    hijoIzquierdo != null ? hijoIzquierdo.getHeight() : -1);
         }
     }
     
     public int getWeight(){
-        return (rightChild != null ? rightChild.getHeight() : -1) 
-        - (leftChild != null ? leftChild.getHeight() : -1);
+        return (hijoDerecho != null ? hijoDerecho.getHeight() : -1) 
+        - (hijoIzquierdo != null ? hijoIzquierdo.getHeight() : -1);
     }
 }
