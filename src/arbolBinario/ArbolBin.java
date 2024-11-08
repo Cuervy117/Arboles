@@ -50,7 +50,7 @@ public class ArbolBin<T extends Comparable<T>> implements Serializable {
         }
     }
 
-    public void eliminarNodo(Nodo<T> nodo){
+    public void deleteNodo(Nodo<T> nodo){
         if(nodo.isLeaf()){ //Caso de nodo Hoja
             eliminarHoja(nodo);
         }else{
@@ -71,6 +71,17 @@ public class ArbolBin<T extends Comparable<T>> implements Serializable {
         }
     }
 
+    public Nodo<T> search(T clave){
+        Nodo<T> auxRoot = this.root;
+        while (auxRoot != null) {
+            int comparacion = auxRoot.getClave().compareTo(clave);
+            if(comparacion == 0) return auxRoot;
+            else if(comparacion > 0) auxRoot = auxRoot.getHijoIzquierdo();
+            else auxRoot = auxRoot.getHijoDerecho();
+        }
+        return null;
+    }
+    
     private void eliminarHoja(Nodo<T> hoja){
         Nodo<T> padre = hoja.getPadre();
         if(padre == null) root = null;

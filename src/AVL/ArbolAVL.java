@@ -31,11 +31,11 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBin<T>{
     }
     
     @Override
-    public void eliminarNodo(Nodo<T> nodo){
-        super.eliminarNodo(nodo);
+    public void deleteNodo(Nodo<T> nodo){
+        super.deleteNodo(nodo);
         this.restructuring();
     }
-    
+
     public void simpleRightRotation(NodeAVL<T> node){
         if(node == null) return;
         Nodo<T> child = node.getHijoIzquierdo();

@@ -51,8 +51,10 @@ public class Principal {
             System.out.println("No se pudo cargar el árbol desde la base de datos.");
         }
         ArbolAVL<Integer> arbolito = arboles.get(0);
-        arbolito.eliminarNodo(nodo);
+        arbolito.deleteNodo(nodo);
         System.out.println("nodo eliminado");
         ArbolAVL.preOrder(arbolito.getAVLRoot());
+        System.out.println("Buscando 30");
+        System.out.println(arbolito.search(30).getClave());
     }
 }
