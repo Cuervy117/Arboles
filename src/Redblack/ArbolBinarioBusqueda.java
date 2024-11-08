@@ -1,7 +1,7 @@
 package Redblack;
 
 public class ArbolBinarioBusqueda {
-    protected Nodo raiz;
+    protected  Nodo raiz;
     public ArbolBinarioBusqueda(Nodo raiz){
         this.raiz = raiz;
     }
@@ -9,7 +9,7 @@ public class ArbolBinarioBusqueda {
         this.raiz = null;
     }
 
-    protected void añadir(Nodo nodo){
+    public void añadir(Nodo nodo){
         Nodo rootAux = raiz;
         if(raiz == null){
             this.raiz = nodo;
@@ -37,11 +37,11 @@ public class ArbolBinarioBusqueda {
         }
     }
     
-    public String notacionPrefija(){
+    /*public String notacionPrefija(){
         StringBuilder prefija = new StringBuilder();
         recorridoPreOrden(raiz, prefija);
         return prefija.toString().trim();
-    }
+    }*/
 
     public String notacionInfija(){
         StringBuilder prefija = new StringBuilder();
@@ -55,13 +55,13 @@ public class ArbolBinarioBusqueda {
         return prefija.toString().trim();
     }
 
-    public static void recorridoPreOrden(Nodo raiz, StringBuilder notacion) {
+    /*public static void recorridoPreOrden(Nodo raiz, StringBuilder notacion) {
         if(raiz != null){
             notacion.append(raiz.getDato()).append(" ");
             recorridoPreOrden(raiz.getIzquierda(), notacion);
             recorridoPreOrden(raiz.getDerecha(), notacion);
         }
-    }
+    }*/
     
     public static void recorridoInOrden(Nodo raiz, StringBuilder notacion){
         if(raiz != null){
@@ -78,5 +78,9 @@ public class ArbolBinarioBusqueda {
             notacion.append(raiz.getDato()).append(" ");
         }
 
+    }
+
+    public Nodo getRaiz(){
+        return this.raiz;
     }
 }

@@ -68,12 +68,18 @@ public class Nodo {
     }
 
     public static Nodo getTio(Nodo nodo){
-        Nodo tio;
-        if (nodo.getPadre().esHijoIzquierdo()) {
-            tio = nodo.getPadre().getPadre().getDerecha();
-        }else{
-           tio = nodo.getPadre().getPadre().getIzquierda();
+        try {
+            Nodo tio;
+            if (nodo.getPadre().esHijoIzquierdo()) {
+                tio = nodo.getPadre().getPadre().getDerecha();
+            }else{
+               tio = nodo.getPadre().getPadre().getIzquierda();
+            }
+            return tio;
+        } catch (NullPointerException e) {
+            System.out.println("Error en getTio() con el nodo: "+ nodo.getDato()+ " " + e.getMessage());
+            return null;
         }
-        return tio;
+
     }
 }

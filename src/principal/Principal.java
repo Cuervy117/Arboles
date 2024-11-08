@@ -13,9 +13,18 @@ import Redblack.*;
 public class Principal {
     public static void main(String[] args) {
         Arbolredblack rojinegro = new Arbolredblack();
-        rojinegro.insertar(new Nodo(5));
+        rojinegro.insertar(new Nodo(11));
+        rojinegro.insertar(new Nodo(2));
+        rojinegro.insertar(new Nodo(14));
+        rojinegro.insertar(new Nodo(14));
+        rojinegro.insertar(new Nodo(1));
+        //rojinegro.insertar(new Nodo(7));
+        //rojinegro.insertar(new Nodo(15));
+        //rojinegro.insertar(new Nodo(8));
+        //rojinegro.insertar(new Nodo(4));
 
-        System.out.println(rojinegro.notacionPrefija());
+
+        rojinegro.recorridoPreOrden(rojinegro.getRaiz());
         
         System.out.println("Agregado");
 

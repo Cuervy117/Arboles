@@ -10,8 +10,9 @@ public class Arbolredblack extends ArbolBinarioBusqueda{
 
     public void insertar(Nodo añadido){
         //Recordando que true = rojo, false = negro
-        super.añadir(añadido);
+        añadir(añadido); 
         Nodo auxiliar = añadido;
+        System.out.println("Padre del nodo añadido " + añadido.getDato() + " :" + añadido.getPadre());
         while(Nodo.color(auxiliar.getPadre()) == true ){
             int caso = IdentificarCaso(añadido);
             switch (caso) {
@@ -27,22 +28,35 @@ public class Arbolredblack extends ArbolBinarioBusqueda{
                     System.out.println("Caso 3 detectado");
                     auxiliar = corregirCaso3(añadido);
                 }
-                default -> System.out.println("Hubo error");
+                default -> System.out.println("Puede que se esté iniciando");
             }
         }
+        if(auxiliar != null){
+            while(auxiliar.getPadre() != null){
+                auxiliar = auxiliar.getPadre();
+                raiz = auxiliar;
+            }
+        }
+        this.raiz.setColor(false);
     }
 
     private int IdentificarCaso(Nodo añadido){
-        Nodo tio = Nodo.getTio(añadido);
-        if(tio.esRojo() && !añadido.getPadre().esRojo()){  
-            return 1;
-        }else{
-            if(añadido.getPadre().esRojo() && !añadido.esHijoIzquierdo()){
-                return 2;
+        try {
+            Nodo tio = Nodo.getTio(añadido);
+            if(tio.esRojo() && !añadido.getPadre().esRojo()){  
+                return 1;
             }else{
-                return 3;
+                if(añadido.getPadre().esRojo() && !añadido.esHijoIzquierdo()){
+                    return 2;
+                }else{
+                    return 3;
+                }
             }
+        } catch (NullPointerException e) {
+            System.out.println("Error en Identificar Caso(): " + e.getMessage());
+            return -1;
         }
+
 
     }
 
@@ -74,6 +88,14 @@ public class Arbolredblack extends ArbolBinarioBusqueda{
         abuelo.setPadre(añadido.getPadre());
         abuelo.getPadre().setDerecha(abuelo);
         return añadido;
+    }
+
+    public static void recorridoPreOrden(Nodo raiz) {
+        if(raiz != null){
+            System.out.println(raiz.getDato() + " " + raiz.esRojo());
+            recorridoPreOrden(raiz.getIzquierda());
+            recorridoPreOrden(raiz.getDerecha());
+        }
     }
 
 }
