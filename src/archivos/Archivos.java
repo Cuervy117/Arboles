@@ -9,15 +9,17 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import AVL.*;
 public class Archivos {
-public static void leerBaseDeDatos(ArrayList<ArbolAVL> database){
+    @SuppressWarnings("unchecked")
+    public static <T extends Comparable<T>> void leerBaseDeDatos(ArrayList<ArbolAVL<T>> database){
         ObjectInputStream archivo;
-        ArbolAVL arbol;
+        ArbolAVL<T> arbol;
         try{
             archivo = new ObjectInputStream(new FileInputStream("DataBase"));
-            do{
-                arbol = (ArbolAVL) archivo.readObject();
+            while(true){
+                arbol = (ArbolAVL<T>) archivo.readObject();
+                System.out.println("Cargando árbol con raíz: " + (arbol.getRoot() != null ? arbol.getRoot().getClave() : "null"));
                 database.add(arbol);
-            }while(arbol != null);
+            }
         }catch(EOFException e){
             System.out.println("Base de datos actualizada");
         }catch(IOException | ClassNotFoundException e){
@@ -25,11 +27,11 @@ public static void leerBaseDeDatos(ArrayList<ArbolAVL> database){
         }
     }
     
-    public static void guardarDatos(ArrayList<ArbolAVL> database){
+    public static <T extends Comparable<T>> void guardarDatos(ArrayList<ArbolAVL<T>> database){
         ObjectOutputStream archivo;
         try{
             archivo = new ObjectOutputStream(new FileOutputStream("DataBase"));
-            for(ArbolAVL e : database){
+            for(ArbolAVL<T> e : database){
                 archivo.writeObject(e);
             }
         }catch(IOException e){
