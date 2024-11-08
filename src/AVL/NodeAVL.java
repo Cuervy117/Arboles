@@ -11,17 +11,13 @@ import arbolBinario.*;
  */
 public class NodeAVL<T> extends Nodo<T>{
     private static final long serialVersionUID = 123456789L;
-
-    private NodeAVL<T> hijoIzquierdo;
-    private NodeAVL<T> hijoDerecho; 
-    private NodeAVL<T> padre;
     
     public NodeAVL(){
 
     }
     
     public NodeAVL(T clave){
-        this.clave = clave;
+        super(clave);
     }
     
     public boolean isLeaf(){
@@ -36,24 +32,12 @@ public class NodeAVL<T> extends Nodo<T>{
         this.clave = clave;
     }
 
-    public NodeAVL<T> getHijoIzquierdo() {
-        return hijoIzquierdo;
-    }
-
     public void setHijoIzquierdo(NodeAVL<T> hijoIzquierdo) {
         this.hijoIzquierdo = hijoIzquierdo;
     }
 
-    public NodeAVL<T> getHijoDerecho() {
-        return hijoDerecho;
-    }
-
     public void setHijoDerecho(NodeAVL<T> hijoDerecho) {
         this.hijoDerecho = hijoDerecho;
-    }
-    
-    public NodeAVL<T> getPadre(){
-        return padre;
     }
     
     public void setPadre(NodeAVL<T> padre){
@@ -61,15 +45,19 @@ public class NodeAVL<T> extends Nodo<T>{
     }
     
     public int getHeight(){
-        if(this.isLeaf())return 0;
+        if(this.isLeaf()) return 0;
         else{
-            return 1 + Math.max(hijoDerecho != null ? hijoDerecho.getHeight() : -1,
-                    hijoIzquierdo != null ? hijoIzquierdo.getHeight() : -1);
+            NodeAVL<T> alturaHijoDerecho =  (NodeAVL<T>) this.getHijoDerecho();
+            NodeAVL<T> alturaHijoIzquierdo =  (NodeAVL<T>) this.getHijoIzquierdo();
+            return 1 + Math.max(hijoDerecho != null ? alturaHijoDerecho.getHeight() : -1,
+                    hijoIzquierdo != null ? alturaHijoIzquierdo.getHeight() : -1);
         }
     }
     
     public int getWeight(){
-        return (hijoDerecho != null ? hijoDerecho.getHeight() : -1) 
-        - (hijoIzquierdo != null ? hijoIzquierdo.getHeight() : -1);
+        NodeAVL<T> pesoHijoDerecho =  (NodeAVL<T>) this.getHijoDerecho();
+        NodeAVL<T> pesoHijoIzquierdo =  (NodeAVL<T>) this.getHijoIzquierdo();
+        return (hijoDerecho != null ? pesoHijoDerecho.getHeight() : -1) 
+        - (hijoIzquierdo != null ? pesoHijoIzquierdo.getHeight() : -1);
     }
 }

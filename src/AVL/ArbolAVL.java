@@ -23,6 +23,7 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBin<T>{
     public NodeAVL<T> getAVLRoot(){
         return (NodeAVL<T>) root;
     }
+
     @Override
     public void add(Nodo<T> node){
         super.add(node);
@@ -31,49 +32,49 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBin<T>{
     
     public void simpleRightRotation(NodeAVL<T> node){
         if(node == null) return;
-        NodeAVL<T> child = node.getHijoIzquierdo();
+        NodeAVL<T> child = (NodeAVL<T>) node.getHijoIzquierdo();
         if(child == null)return;
         
-        NodeAVL<T> Padre = node.getPadre();
+        NodeAVL<T> Padre = (NodeAVL<T>) node.getPadre();
         
         node.setHijoIzquierdo(child.getHijoDerecho());
-        if(child.getHijoDerecho() != null) child.getHijoDerecho().setPadre(node);
+        if(child.getHijoDerecho() != null) child.getHijoDerecho().setPadre((Nodo<T>) node);
         
-        child.setPadre(Padre);
-        if(Padre == null)root = (Nodo<T>)child;
-        else if(node == Padre.getHijoIzquierdo()) Padre.setHijoIzquierdo(child);
-        else Padre.setHijoDerecho(child);
+        child.setPadre((Nodo<T>) Padre);
+        if(Padre == null)root = (Nodo<T>) child;
+        else if(node == Padre.getHijoIzquierdo()) Padre.setHijoIzquierdo((Nodo<T>) child);
+        else Padre.setHijoDerecho((Nodo<T>) child);
         
-        child.setHijoDerecho(node);
-        node.setPadre(child);
+        child.setHijoDerecho((Nodo<T>) node);
+        node.setPadre((Nodo<T>) child);
     }
     
     public void simpleLeftRotation(NodeAVL<T> node){
         if(node == null) return;
-        NodeAVL<T> child = node.getHijoDerecho();
+        NodeAVL<T> child = (NodeAVL<T>) node.getHijoDerecho();
         if(child == null) return;
         
-        NodeAVL<T> padre = node.getPadre();
+        NodeAVL<T> padre = (NodeAVL<T>) node.getPadre();
         
         node.setHijoDerecho(child.getHijoIzquierdo());
-        if(child.getHijoIzquierdo() != null) child.getHijoIzquierdo().setPadre(node);
+        if(child.getHijoIzquierdo() != null) child.getHijoIzquierdo().setPadre((Nodo<T>) node);
         
-        child.setPadre(padre);
-        if(padre == null)root = (Nodo<T>)child;
-        else if(node == padre.getHijoIzquierdo()) padre.setHijoIzquierdo(child);
-        else padre.setHijoDerecho(child);
+        child.setPadre((Nodo<T>) padre);
+        if(padre == null)root = (Nodo<T>) child;
+        else if(node == padre.getHijoIzquierdo()) padre.setHijoIzquierdo((Nodo<T>) child);
+        else padre.setHijoDerecho((Nodo<T>) child);
         
-        child.setHijoIzquierdo(node);
-        node.setPadre(child);
+        child.setHijoIzquierdo((Nodo<T>) node);
+        node.setPadre((Nodo<T>) child);
     }
     
     public void doubleRightRotation(NodeAVL<T> node){
-        this.simpleLeftRotation(node.getHijoIzquierdo());
+        this.simpleLeftRotation((NodeAVL<T>) node.getHijoIzquierdo());
         this.simpleRightRotation(node);
     }
     
     public void doubleLeftRotation(NodeAVL<T> node){
-        this.simpleRightRotation(node.getHijoDerecho());
+        this.simpleRightRotation((NodeAVL<T>) node.getHijoDerecho());
         this.simpleLeftRotation(node);
     }
     
@@ -82,9 +83,9 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBin<T>{
         int actualWeight = node.getWeight();
         if(actualWeight > 1 || actualWeight < -1) return node;
         else{ 
-            NodeAVL<T> hijoIzquierdo = balanced(node.getHijoIzquierdo());
+            NodeAVL<T> hijoIzquierdo = balanced((NodeAVL<T>) node.getHijoIzquierdo());
             if(hijoIzquierdo != null) return hijoIzquierdo;
-            NodeAVL<T> hijoDerecho = balanced(node.getHijoDerecho());
+            NodeAVL<T> hijoDerecho = balanced((NodeAVL<T>) node.getHijoDerecho());
             if( hijoDerecho != null) return hijoDerecho;
             return null; 
         }
@@ -93,16 +94,16 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBin<T>{
     public void restructuring(){
         NodeAVL<T> unbalanced;
         do {
-            unbalanced = balanced(this.getAVLRoot()); 
+            unbalanced =  balanced(this.getAVLRoot()); 
             if(unbalanced != null){
                 if(unbalanced.getWeight() < -1){
-                    if(unbalanced.getHijoIzquierdo().getWeight() < 0){
+                    if(((NodeAVL<T>) unbalanced.getHijoIzquierdo()).getWeight() < 0){
                         this.simpleRightRotation(unbalanced);
                     }else{
                         this.doubleRightRotation(unbalanced); 
                     }
                 }else if(unbalanced.getWeight() > 1){
-                    if(unbalanced.getHijoDerecho().getWeight() > 0){
+                    if(((NodeAVL<T>) unbalanced.getHijoDerecho()).getWeight() > 0){
                         this.simpleLeftRotation(unbalanced);
                     }else{
                         this.doubleLeftRotation(unbalanced);
