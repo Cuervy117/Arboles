@@ -4,16 +4,19 @@
  */
 package AVL;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 /**
  *
  * @author David
  */
-public class ArbolAVL {
+public class ArbolAVL implements Serializable{
     private Node root;
-
     
     public ArbolAVL(){
-
     }
     
     public ArbolAVL(Node root){
@@ -50,6 +53,7 @@ public class ArbolAVL {
                 }                    
             }
         }
+        this.restructuring();
     }
     
     public static void preOrder(Node node){
@@ -62,6 +66,7 @@ public class ArbolAVL {
     }
     
     public void simple_right_rotation(Node node){
+        if(node == null) return;
         Node child = node.getLeft_child();
         if(child == null)return;
         
@@ -80,6 +85,7 @@ public class ArbolAVL {
     }
     
     public void simple_left_rotation(Node node){
+        if(node == null) return;
         Node child = node.getRight_child();
         if(child == null) return;
         
@@ -107,15 +113,48 @@ public class ArbolAVL {
         this.simple_left_rotation(node);
     }
     
-    public boolean balanced(Node node){
-        if(node == null){
-            return true;
+    public static Node balanced(Node node){
+        if(node == null) return null;
+        int actualWeight = node.getWeight();
+        if(actualWeight > 1 || actualWeight < -1) return node;
+        else{ 
+            Node left_child = balanced(node.getLeft_child());
+            if(left_child != null) return left_child;
+            Node right_child = balanced(node.getRight_child());
+            if( right_child != null) return right_child;
+            return null; 
         }
-        if(node.getWeight() < 2 && node.getWeight() > -2){
-            boolean left = this.balanced(node.getLeft_child());
-            boolean right = this.balanced(node.getRight_child());
-            if(left && right)return true;
-            else return false;
-        }else return false;
+    }
+
+    public void restructuring(){
+        Node unbalanced;
+        do {
+            unbalanced = balanced(this.getRoot()); 
+            if(unbalanced != null){
+                if(unbalanced.getWeight() < -1){
+                    if(unbalanced.getLeft_child().getWeight() < 0){
+                        this.simple_right_rotation(unbalanced);
+                    }else{
+                        this.double_right_rotation(unbalanced); 
+                    }
+                }else if(unbalanced.getWeight() > 1){
+                    if(unbalanced.getRight_child().getWeight() > 0){
+                        this.simple_left_rotation(unbalanced);
+                    }else{
+                        this.double_left_rotation(unbalanced);
+                    }
+                }
+            }
+        } while (unbalanced != null);
+    }
+
+    public void guardarArbol(String filePath) {
+        try (FileOutputStream fileOut = new FileOutputStream(filePath);
+                ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(this);
+            System.out.println("Árbol guardado exitosamente en " + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

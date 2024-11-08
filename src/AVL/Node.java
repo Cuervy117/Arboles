@@ -3,29 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package AVL;
-import java.math.*;
+
+import java.io.Serializable;
+
 /**
  *
  * @author David
  */
-public class Node {
+public class Node implements Serializable{
     
     private int key;
     private Node left_child;
     private Node right_child; 
     private Node parent;
-    private int weight;
     
     public Node(){
         this.key = 0;
-        this.weight = 0;
         this.left_child = null;
         this.right_child = null;
     }
     
     public Node(int key){
         this.key = key;
-        this.weight = 0;
         this.left_child = null;
         this.right_child = null;
     }
@@ -75,6 +74,7 @@ public class Node {
     }
     
     public int getWeight(){
-        return (right_child != null ? right_child.getHeight() : 0) - (left_child != null ? left_child.getHeight() : 0);
+        return (right_child != null ? right_child.getHeight() : -1) 
+        - (left_child != null ? left_child.getHeight() : -1);
     }
 }
