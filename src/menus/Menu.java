@@ -3,6 +3,6 @@ package menus;
 import java.util.Scanner;
 
 public interface Menu {
-    public static void opciones(){};
-    public static void ejecutarMenu(Scanner sc){};
+    static void opciones(){};
+    static void ejecutarMenu(Scanner sc){};
 }
