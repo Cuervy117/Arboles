@@ -65,6 +65,7 @@ public class Node {
     public void setParent(Node parent){
         this.parent = parent;
     }
+    
     public int getHeight(){
         if(this.isLeaf())return 0;
         else{
