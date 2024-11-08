@@ -1,45 +1,52 @@
 package arbolBinario;
 
-public class Nodo {
+import java.io.Serializable;
+
+public class Nodo<T> implements Serializable{
     
-    String valor;
-    Nodo izq = null;
-    Nodo der = null;
-    
+    protected T clave;
+    protected Nodo<T> hijoIzquierdo;
+    protected Nodo<T> hijoDerecho;
+    protected Nodo<T> padre;
+
     public Nodo(){
-        izq=der=null;
+
     }
-    public Nodo(String data){
-        this(data,null,null);
+
+    public Nodo(T clave){
+        this.clave = clave;
+        this.hijoDerecho = this.hijoIzquierdo = this.padre = null;
     }
-    public Nodo(String data, Nodo lt, Nodo rt){
-        valor=data;
-        izq = lt;
-        der = rt;
-    }   
-    
-    public void setIzq(Nodo izq) {
-        this.izq = izq;
+
+    public void setHijoIzquierdo(Nodo<T> nodoHijo) {
+        this.hijoIzquierdo = nodoHijo;
     }
     
-    public void setDer(Nodo der) {
-        this.der = der;
+    public void setHijoDerecho(Nodo<T> nodoHijo) {
+        this.hijoDerecho = nodoHijo;
     }
 
-    public void setValor(String valor){
-        this.valor = valor;
+    public void setValor(T valor){
+        this.clave = valor;
     }
 
-    public Nodo getIzq() {
-        return izq;
+    public Nodo<T> getHijoIzquierdo() {
+        return hijoIzquierdo;
     }
 
-    public Nodo getDer() {
-        return der;
+    public Nodo<T> getHijoDerecho() {
+        return hijoDerecho;
     }
 
-    public String getValor(){
-        return valor;
+    public T getClave(){
+        return clave;
     }
     
+    public Nodo<T> getPadre(){
+        return padre;
+    }
+
+    public void setPadre(Nodo<T> nodoPadre){
+        this.padre = nodoPadre;
+    }
 }

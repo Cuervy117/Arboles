@@ -4,51 +4,50 @@
  */
 package AVL;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import arbolBinario.*;
 
 /**
  *
  * @author David
  */
-public class ArbolAVL implements Serializable{
-    private Node root;
-    
+public class ArbolAVL<T extends Comparable<T>> extends ArbolBin<T>{
+    private static final long serialVersionUID = 3346824320569853901L;
+    private NodeAVL<T> root;
+
     public ArbolAVL(){
     }
     
-    public ArbolAVL(Node root){
+    public ArbolAVL(NodeAVL<T> root){
         this.root = root;
     }
     
-    public Node getRoot(){
+    public NodeAVL<T> getRoot(){
         return root;
     }
     
-    public void add(Node node){
-        Node rootAux = root;
+    public void add(NodeAVL<T> node){
+        NodeAVL<T> rootAux = root;
         if(root == null){
             this.root = node;
             return;
         }
         while(true){
+            int comparacion = node.getClave().compareTo(rootAux.getClave());
             if(rootAux.getClave() == node.getClave()) break;
-            else if(node.getClave() > rootAux.getClave()){
-                if(rootAux.getRight_child() != null){
-                    rootAux = rootAux.getRight_child();
+            else if(comparacion > 0){
+                if(rootAux.getRightChild() != null){
+                    rootAux = rootAux.getRightChild();
                 }else{
                     node.setParent(rootAux);
-                    rootAux.setRight_child(node);
+                    rootAux.setRightChild(node);
                     break;
                 }
             }else{
-                if(rootAux.getLeft_child() != null){
-                    rootAux = rootAux.getLeft_child();
+                if(rootAux.getLeftChild() != null){
+                    rootAux = rootAux.getLeftChild();
                 }else{
                     node.setParent(rootAux);
-                    rootAux.setLeft_child(node);
+                    rootAux.setLeftChild(node);
                     break;
                 }                    
             }
@@ -56,105 +55,95 @@ public class ArbolAVL implements Serializable{
         this.restructuring();
     }
     
-    public static void preOrder(Node node){
-        if(node == null){
-            return;
-        }
-        System.out.println(node.getClave());
-        preOrder(node.getLeft_child());
-        preOrder(node.getRight_child());
-    }
-    
-    public void simple_right_rotation(Node node){
+    public void simpleRightRotation(NodeAVL<T> node){
         if(node == null) return;
-        Node child = node.getLeft_child();
+        NodeAVL<T> child = node.getLeftChild();
         if(child == null)return;
         
-        Node parent = node.getParent();
+        NodeAVL<T> parent = node.getParent();
         
-        node.setLeft_child(child.getRight_child());
-        if(child.getRight_child() != null) child.getRight_child().setParent(node);
+        node.setLeftChild(child.getRightChild());
+        if(child.getRightChild() != null) child.getRightChild().setParent(node);
         
         child.setParent(parent);
         if(parent == null)root = child;
-        else if(node == parent.getLeft_child()) parent.setLeft_child(child);
-        else parent.setRight_child(child);
+        else if(node == parent.getLeftChild()) parent.setLeftChild(child);
+        else parent.setRightChild(child);
         
-        child.setRight_child(node);
+        child.setRightChild(node);
         node.setParent(child);
     }
     
-    public void simple_left_rotation(Node node){
+    public void simpleLeftRotation(NodeAVL<T> node){
         if(node == null) return;
-        Node child = node.getRight_child();
+        NodeAVL<T> child = node.getRightChild();
         if(child == null) return;
         
-        Node parent = node.getParent();
+        NodeAVL<T> parent = node.getParent();
         
-        node.setRight_child(child.getLeft_child());
-        if(child.getLeft_child() != null) child.getLeft_child().setParent(node);
+        node.setRightChild(child.getLeftChild());
+        if(child.getLeftChild() != null) child.getLeftChild().setParent(node);
         
         child.setParent(parent);
         if(parent == null)root = child;
-        else if(node == parent.getLeft_child()) parent.setLeft_child(child);
-        else parent.setRight_child(child);
+        else if(node == parent.getLeftChild()) parent.setLeftChild(child);
+        else parent.setRightChild(child);
         
-        child.setLeft_child(node);
+        child.setLeftChild(node);
         node.setParent(child);
     }
     
-    public void double_right_rotation(Node node){
-        this.simple_left_rotation(node.getLeft_child());
-        this.simple_right_rotation(node);
+    public void doubleRightRotation(NodeAVL<T> node){
+        this.simpleLeftRotation(node.getLeftChild());
+        this.simpleRightRotation(node);
     }
     
-    public void double_left_rotation(Node node){
-        this.simple_right_rotation(node.getRight_child());
-        this.simple_left_rotation(node);
+    public void doubleLeftRotation(NodeAVL<T> node){
+        this.simpleRightRotation(node.getRightChild());
+        this.simpleLeftRotation(node);
     }
     
-    public static Node balanced(Node node){
+    public NodeAVL<T> balanced(NodeAVL<T> node){
         if(node == null) return null;
         int actualWeight = node.getWeight();
         if(actualWeight > 1 || actualWeight < -1) return node;
         else{ 
-            Node left_child = balanced(node.getLeft_child());
-            if(left_child != null) return left_child;
-            Node right_child = balanced(node.getRight_child());
-            if( right_child != null) return right_child;
+            NodeAVL<T> leftChild = balanced(node.getLeftChild());
+            if(leftChild != null) return leftChild;
+            NodeAVL<T> rightChild = balanced(node.getRightChild());
+            if( rightChild != null) return rightChild;
             return null; 
         }
     }
 
     public void restructuring(){
-        Node unbalanced;
+        NodeAVL<T> unbalanced;
         do {
             unbalanced = balanced(this.getRoot()); 
             if(unbalanced != null){
                 if(unbalanced.getWeight() < -1){
-                    if(unbalanced.getLeft_child().getWeight() < 0){
-                        this.simple_right_rotation(unbalanced);
+                    if(unbalanced.getLeftChild().getWeight() < 0){
+                        this.simpleRightRotation(unbalanced);
                     }else{
-                        this.double_right_rotation(unbalanced); 
+                        this.doubleRightRotation(unbalanced); 
                     }
                 }else if(unbalanced.getWeight() > 1){
-                    if(unbalanced.getRight_child().getWeight() > 0){
-                        this.simple_left_rotation(unbalanced);
+                    if(unbalanced.getRightChild().getWeight() > 0){
+                        this.simpleLeftRotation(unbalanced);
                     }else{
-                        this.double_left_rotation(unbalanced);
+                        this.doubleLeftRotation(unbalanced);
                     }
                 }
             }
         } while (unbalanced != null);
     }
 
-    public void guardarArbol(String filePath) {
-        try (FileOutputStream fileOut = new FileOutputStream(filePath);
-                ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-            out.writeObject(this);
-            System.out.println("Árbol guardado exitosamente en " + filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static <T> void preOrder(NodeAVL<T> node){
+        if(node == null){
+            return;
         }
+        System.out.println(node.getClave());
+        preOrder(node.getLeftChild());
+        preOrder(node.getRightChild());
     }
 }
