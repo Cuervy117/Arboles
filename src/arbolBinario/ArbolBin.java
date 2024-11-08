@@ -50,6 +50,34 @@ public class ArbolBin<T extends Comparable<T>> implements Serializable {
         }
     }
 
+    public void eliminarNodo(Nodo<T> nodo){
+        if(nodo.isLeaf()){ //Caso de nodo Hoja
+            eliminarHoja(nodo);
+        }else{
+            Nodo<T> reemplazo = nodo.getReemplazo();
+            //asilamos al reemplazo
+            Nodo<T> padreReemplazo = reemplazo.getPadre();
+            if(padreReemplazo.getHijoDerecho() == reemplazo) padreReemplazo.setHijoDerecho(null);
+            else padreReemplazo.setHijoIzquierdo(null);
+            //reasignamos los hijos
+            reemplazo.setHijoDerecho(nodo.getHijoDerecho());
+            reemplazo.setHijoIzquierdo(nodo.getHijoIzquierdo());
+
+            //reasignamos la referencia del padre
+            Nodo<T> padreNodo = nodo.getPadre();
+            reemplazo.setPadre(padreNodo);
+            if(padreNodo.getHijoDerecho() == nodo) padreNodo.setHijoDerecho(reemplazo);
+            else padreNodo.setHijoIzquierdo(reemplazo);    
+        }
+    }
+
+    private void eliminarHoja(Nodo<T> hoja){
+        Nodo<T> padre = hoja.getPadre();
+        if(padre == null) root = null;
+        else if(hoja == padre.getHijoIzquierdo()) padre.setHijoIzquierdo(null);
+        else padre.setHijoDerecho(null);
+    }
+
     public void notPrefija(Nodo<T> r) {
         if (r != null) {
             System.out.println(r.getClave());

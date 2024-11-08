@@ -28,13 +28,14 @@ public class Principal {
         Archivos.leerBaseDeDatos(arboles);
         ArbolAVL.preOrder(arboles.get(0).getRoot());
         Archivos.guardarDatos(arboles);*/
+        NodeAVL<Integer> nodo = new NodeAVL<>(25);
         ArbolAVL<Integer> nuevoArbol = new ArbolAVL<>(new NodeAVL<>(20));
-        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(15));
-        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(10));
-        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(12));
-        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(25));
-        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(30));
-        nuevoArbol.add((Nodo<Integer>)new NodeAVL<>(28));
+        nuevoArbol.add((Nodo<Integer>) new NodeAVL<>(15));
+        nuevoArbol.add((Nodo<Integer>) new NodeAVL<>(10));
+        nuevoArbol.add((Nodo<Integer>) new NodeAVL<>(12));
+        nuevoArbol.add((Nodo<Integer>) nodo);
+        nuevoArbol.add((Nodo<Integer>) new NodeAVL<>(30));
+        nuevoArbol.add((Nodo<Integer>) new NodeAVL<>(28));
         ArbolAVL.preOrder(nuevoArbol.getAVLRoot());
         // Guardar el árbol en la base de datos
         ArrayList<ArbolAVL<Integer>> arboles = new ArrayList<>();
@@ -42,9 +43,6 @@ public class Principal {
         Archivos.guardarDatos(arboles); // Guardar el árbol en el archivo
 
         // Limpiar la lista y cargar desde la base de datos para verificar
-        arboles.clear();
-        Archivos.leerBaseDeDatos(arboles); // Cargar árboles desde el archivo
-
         // Verificar el árbol cargado
         if (!arboles.isEmpty()) {
             ArbolAVL<Integer> arbolCargado = arboles.get(0);
@@ -52,6 +50,9 @@ public class Principal {
         } else {
             System.out.println("No se pudo cargar el árbol desde la base de datos.");
         }
-    
+        ArbolAVL<Integer> arbolito = arboles.get(0);
+        arbolito.eliminarNodo(nodo);
+        System.out.println("nodo eliminado");
+        ArbolAVL.preOrder(arbolito.getAVLRoot());
     }
 }

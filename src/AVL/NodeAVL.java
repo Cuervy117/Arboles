@@ -20,10 +20,6 @@ public class NodeAVL<T> extends Nodo<T>{
         super(clave);
     }
     
-    public boolean isLeaf(){
-        return (hijoIzquierdo == null) && (hijoDerecho == null) ? true : false;
-    }
-    
     public T getClave() {
         return clave;
     }

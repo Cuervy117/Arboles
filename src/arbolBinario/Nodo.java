@@ -49,4 +49,26 @@ public class Nodo<T> implements Serializable{
     public void setPadre(Nodo<T> nodoPadre){
         this.padre = nodoPadre;
     }
+
+    public boolean isLeaf(){
+        return (hijoIzquierdo == null) && (hijoDerecho == null) ? true : false;
+    }
+
+    public Nodo<T> getReemplazo(){
+        if(this.isLeaf()) return null;
+        Nodo<T> reemplazo = this.getHijoDerecho();
+        if(reemplazo != null){
+            while (reemplazo.getHijoIzquierdo() != null) {
+                reemplazo = reemplazo.getHijoIzquierdo();
+            }
+            return reemplazo;
+        }else{
+            reemplazo = this.getHijoIzquierdo();
+            while (reemplazo.getHijoDerecho() != null) {
+                reemplazo = reemplazo.getHijoDerecho();
+            }
+            return reemplazo;
+        }
+    }
+
 }
