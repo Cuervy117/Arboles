@@ -4,10 +4,17 @@
  */
 package principal;
 
+import Redblack.Arbolredblack;
+import Redblack.Nodo;
+
 /**
  *
  * @author David
  */
-public class main {
-    
+public class Principal {
+    public static void main(String[] args) {
+        Arbolredblack rojinegro = new Arbolredblack();
+        rojinegro.insertar(new Nodo(5));
+
+    }
 }
