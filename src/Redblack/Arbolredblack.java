@@ -13,7 +13,6 @@ public class Arbolredblack extends ArbolBinarioBusqueda{
         super.añadir(añadido);
         Nodo auxiliar = añadido;
         while(Nodo.color(auxiliar.getPadre()) == true ){
-            this.inser
             int caso = IdentificarCaso(añadido);
             switch (caso) {
                 case 1 -> {

@@ -4,8 +4,7 @@
  */
 package principal;
 
-import Redblack.Arbolredblack;
-import Redblack.Nodo;
+import Redblack.*;
 
 /**
  *
@@ -15,6 +14,10 @@ public class Principal {
     public static void main(String[] args) {
         Arbolredblack rojinegro = new Arbolredblack();
         rojinegro.insertar(new Nodo(5));
+
+        System.out.println(rojinegro.notacionPrefija());
+        
+        System.out.println("Agregado");
 
     }
 }
