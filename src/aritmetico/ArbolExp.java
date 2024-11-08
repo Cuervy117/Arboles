@@ -5,20 +5,21 @@ import java.util.Stack;
 import arbolBinario.ArbolBin;
 import arbolBinario.Nodo;
 
-public class ArbolExp extends ArbolBin {
+public class ArbolExp extends ArbolBin<String> {
+
     private static final List<String> operadores = List.of("+", "-", "*", "/");
 
     public ArbolExp(String[] elementos) {
         root = crearArbolDeExpresion(elementos);
     }
 
-    public Nodo crearArbolDeExpresion(String[] elementos) {
+    public Nodo<String> crearArbolDeExpresion(String[] elementos) {
         Stack<String> operadores = new Stack<>();
-        Stack<Nodo> operandos = new Stack<>();
+        Stack<Nodo<String>> operandos = new Stack<>();
 
         for (String elemento : elementos) {
             if (esOperando(elemento)) {
-                operandos.push(new Nodo(elemento));
+                operandos.push(new Nodo<String>(elemento));
             } else if (esOperador(elemento)) {
                 while (!operadores.isEmpty() && definirPrioridad(operadores.peek()) >= definirPrioridad(elemento)) {
                     obtenerSubarbol(operadores, operandos);
@@ -64,16 +65,16 @@ public class ArbolExp extends ArbolBin {
         }
     }
 
-    public void obtenerSubarbol(Stack<String> operadores, Stack<Nodo> operandos) {
+    public void obtenerSubarbol(Stack<String> operadores, Stack<Nodo<String>> operandos) {
         if (operadores.isEmpty() || operandos.size() < 2) return;
 
         String operador = operadores.pop();
-        Nodo der = operandos.pop();
-        Nodo izq = operandos.pop();
+        Nodo<String> der = operandos.pop();
+        Nodo<String> izq = operandos.pop();
 
-        Nodo nodoOperador = new Nodo(operador);
-        nodoOperador.setIzq(izq);
-        nodoOperador.setDer(der);
+        Nodo<String> nodoOperador = new Nodo<>(operador);
+        nodoOperador.setHijoIzquierdo(izq);
+        nodoOperador.setHijoDerecho(der);
 
         operandos.push(nodoOperador);
     }

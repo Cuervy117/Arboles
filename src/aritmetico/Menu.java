@@ -8,7 +8,7 @@ import java.util.Stack;
 import arbolBinario.Nodo;
 
 public class Menu {
-    public static ArbolExp arbol = null;
+    public static ArbolExp arbol;
 
     public static void arbolAritmetico(Scanner scanner) {
         int opcion;
@@ -65,22 +65,22 @@ public class Menu {
         }
 
         List<String> rpn = obtenerRPN(arbol.getRoot());
-        System.out.println("Reverse Polish Notation: " + String.join(" ", rpn));
+        System.out.println("Notacion polaca inversa: " + String.join(" ", rpn));
         double resultado = resolverConRPN(rpn);
         System.out.println("Resultado de la expresión: " + resultado);
     }
 
-    public static List<String> obtenerRPN(Nodo nodo) {
+    public static List<String> obtenerRPN(Nodo<String> nodo) {
         List<String> rpn = new ArrayList<>();
         obtenerRPNPostorden(nodo, rpn);
         return rpn;
     }
 
-    public static void obtenerRPNPostorden(Nodo nodo, List<String> rpn) {
+    public static void obtenerRPNPostorden(Nodo<String> nodo, List<String> rpn) {
         if (nodo != null) {
-            obtenerRPNPostorden(nodo.getIzq(), rpn);
-            obtenerRPNPostorden(nodo.getDer(), rpn);
-            rpn.add(nodo.getValor());
+            obtenerRPNPostorden(nodo.getHijoIzquierdo(), rpn);
+            obtenerRPNPostorden(nodo.getHijoDerecho(), rpn);
+            rpn.add(nodo.getClave());
         }
     }
 
