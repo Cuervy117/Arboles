@@ -54,6 +54,10 @@ public class Nodo<T> implements Serializable{
         return (hijoIzquierdo == null) && (hijoDerecho == null) ? true : false;
     }
 
+    public boolean isFull(){
+        return (hijoDerecho != null) && (hijoIzquierdo != null) ? true : false;
+    }
+
     public Nodo<T> getReemplazo(){
         if(this.isLeaf()) return null;
         Nodo<T> reemplazo = this.getHijoDerecho();
