@@ -1,11 +1,12 @@
-package aritmetico;
+package arboles.aritmetico;
 
 import java.util.List;
 import java.util.Stack;
-import arbolBinario.ArbolBin;
-import arbolBinario.Nodo;
 
-public class ArbolExp extends ArbolBin<String> {
+import arboles.binario.Nodo;
+import arboles.deBusqueda.ABB;
+
+public class ArbolExp extends ABB<String> {
 
     private static final List<String> operadores = List.of("+", "-", "*", "/");
 

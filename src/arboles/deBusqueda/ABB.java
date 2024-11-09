@@ -1,26 +1,23 @@
-package arbolBinario;
+package arboles.deBusqueda;
 
-import java.io.Serializable;
+import arboles.binario.ArbolBinario;
+import arboles.binario.Nodo;
 
-public class ArbolBin<T extends Comparable<T>> implements Serializable {
-    protected Nodo<T> root;
-    
-    public ArbolBin(){
+public class ABB<T extends Comparable<T>> extends ArbolBinario<T> {
 
+    public ABB(){
+        super();
     }
     
-    public ArbolBin(T val){
-        root = new Nodo<T>(val);
+    public ABB(T clave){
+        super(clave);
     }
     
-    public ArbolBin(Nodo<T> root){
-        this.root = root;
+    public ABB(Nodo<T> root){
+        super(root);
     }
 
-    public Nodo<T> getRoot(){
-        return root;
-    }
-    
+    @Override
     public void add(Nodo<T> nodo){
         Nodo<T> rootAux = root;
         if(root == null){
@@ -50,7 +47,8 @@ public class ArbolBin<T extends Comparable<T>> implements Serializable {
         }
     }
 
-    public void deleteNodo(Nodo<T> nodo){
+    @Override
+    public void delete(Nodo<T> nodo){
         if(nodo.isLeaf()){ //Caso de nodo Hoja
             eliminarHoja(nodo);
         }else{
@@ -81,36 +79,5 @@ public class ArbolBin<T extends Comparable<T>> implements Serializable {
         }
         return null;
     }
-    
-    private void eliminarHoja(Nodo<T> hoja){
-        Nodo<T> padre = hoja.getPadre();
-        if(padre == null) root = null;
-        else if(hoja == padre.getHijoIzquierdo()) padre.setHijoIzquierdo(null);
-        else padre.setHijoDerecho(null);
-    }
-
-    public void notPrefija(Nodo<T> r) {
-        if (r != null) {
-            System.out.println(r.getClave());
-            notPrefija(r.getHijoIzquierdo());
-            notPrefija(r.getHijoDerecho());
-        }   
-    }
-
-    public void notInfija(Nodo<T> r){
-        if (r != null) {
-            notInfija(r.getHijoIzquierdo());
-            System.out.println(r.getClave());
-            notInfija(r.getHijoDerecho());
-        }  
-    }
-
-    public void notPostfija(Nodo<T> r) {
-        if (r != null) {
-            notPostfija(r.getHijoIzquierdo());
-            notPostfija(r.getHijoDerecho());
-            System.out.println(r.getClave());
-        }  
-    } 
 
 }

@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import AVL.*;
+
+import arboles.AVL.*;
+
 public class Archivos {
     @SuppressWarnings("unchecked")
     public static <T extends Comparable<T>> void leerBaseDeDatos(ArrayList<ArbolAVL<T>> database){

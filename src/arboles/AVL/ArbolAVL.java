@@ -2,20 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package AVL;
+package arboles.AVL;
 
-import arbolBinario.*;
+import arboles.binario.Nodo;
+import arboles.deBusqueda.*;
 
 /**
  *
  * @author David
  */
-public class ArbolAVL<T extends Comparable<T>> extends ArbolBin<T>{
-    private static final long serialVersionUID = 3346824320569853901L;
+public class ArbolAVL<T extends Comparable<T>> extends ABB<T>{
 
     public ArbolAVL(){
+        super();
     }
     
+    public ArbolAVL(T clave){
+        super(clave);
+    }
+
     public ArbolAVL(Nodo<T> root){
         super(root);
     }
@@ -31,8 +36,8 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBin<T>{
     }
     
     @Override
-    public void deleteNodo(Nodo<T> nodo){
-        super.deleteNodo(nodo);
+    public void delete(Nodo<T> nodo){
+        super.delete(nodo);
         this.restructuring();
     }
 
@@ -117,15 +122,6 @@ public class ArbolAVL<T extends Comparable<T>> extends ArbolBin<T>{
                 }
             }
         } while (unbalanced != null);
-    }
-
-    public static <T> void preOrder(Nodo<T> node){
-        if(node == null){
-            return;
-        }
-        System.out.println(node.getClave());
-        preOrder((Nodo<T>) node.getHijoIzquierdo());
-        preOrder((Nodo<T>) node.getHijoDerecho());
     }
 
 }

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
-import arbolBinario.Nodo;
-import aritmetico.ArbolExp;
+import arboles.aritmetico.ArbolExp;
+import arboles.binario.Nodo;
 
 public class MenuAritmetico implements Menu{
     public static ArbolExp arbol;

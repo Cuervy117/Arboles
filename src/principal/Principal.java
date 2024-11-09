@@ -1,8 +1,8 @@
 package principal;
 import java.util.ArrayList;
 
-import AVL.*;
-import arbolBinario.Nodo;
+import arboles.AVL.*;
+import arboles.binario.Nodo;
 import archivos.*;
 /**
  *
@@ -36,7 +36,7 @@ public class Principal {
         nuevoArbol.add((Nodo<Integer>) nodo);
         nuevoArbol.add((Nodo<Integer>) new NodeAVL<>(30));
         nuevoArbol.add((Nodo<Integer>) new NodeAVL<>(28));
-        ArbolAVL.preOrder(nuevoArbol.getAVLRoot());
+        nuevoArbol.notPrefija(nuevoArbol.getRoot());
         // Guardar el árbol en la base de datos
         ArrayList<ArbolAVL<Integer>> arboles = new ArrayList<>();
         arboles.add(nuevoArbol);
@@ -46,14 +46,15 @@ public class Principal {
         // Verificar el árbol cargado
         if (!arboles.isEmpty()) {
             ArbolAVL<Integer> arbolCargado = arboles.get(0);
-            ArbolAVL.preOrder(arbolCargado.getAVLRoot()); // Recorrer el árbol en preorden
+            arbolCargado.notPrefija(arbolCargado.getRoot()); // Recorrer el árbol en preorden
         } else {
             System.out.println("No se pudo cargar el árbol desde la base de datos.");
         }
         ArbolAVL<Integer> arbolito = arboles.get(0);
-        arbolito.deleteNodo(nodo);
+        arbolito.delete(nodo);
         System.out.println("nodo eliminado");
-        ArbolAVL.preOrder(arbolito.getAVLRoot());
+        //ArbolAVL.preOrder(arbolito.getAVLRoot());
+        arbolito.notPrefija(arbolito.getRoot());
         System.out.println("Buscando 30");
         System.out.println(arbolito.search(30).getClave());
     }

@@ -1,4 +1,4 @@
-package arbolBinario;
+package arboles.binario;
 
 import java.io.Serializable;
 
