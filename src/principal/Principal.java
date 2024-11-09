@@ -30,9 +30,9 @@ public class Principal {
         arbol.add(nodo8);
         arbol.add(nodo9);
         arbol.notPrefija(nodo1);
-        arbol.delete(nodo9);
-        System.out.println("11 eliminado");
-        arbol.notPrefija(nodo1);
+        nodo1.nodeSwap(nodo9);
+        System.out.println("intercambio");
+        arbol.notPrefija(nodo9);
 
     }
 }

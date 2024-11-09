@@ -75,4 +75,37 @@ public class Nodo<T> implements Serializable{
         }
     }
 
+    public void nodeSwap(Nodo<T> objetivo){
+        if(this.padre == objetivo) {
+            objetivo.nodeSwap(this);
+            return;
+        } 
+
+        Nodo<T> auxiliarDerecho = this.hijoDerecho;
+        Nodo<T> auxiliarIzquierdo = this.hijoIzquierdo;
+        Nodo<T> auxiliarPadre = this.padre;
+
+        if(auxiliarPadre == objetivo.getPadre()){
+            if(auxiliarPadre.getHijoDerecho() == this){
+                auxiliarPadre.setHijoDerecho(objetivo);
+                auxiliarPadre.setHijoIzquierdo(this);
+            } else {
+                auxiliarPadre.setHijoIzquierdo(objetivo);
+                auxiliarPadre.setHijoDerecho(this);
+            }
+        } else if(objetivo.getPadre() == this) {
+            this.hijoDerecho = objetivo.getHijoDerecho();
+            this.hijoIzquierdo = objetivo.getHijoIzquierdo();
+            this.padre = objetivo;
+
+        } else {
+            this.setHijoDerecho(objetivo.getHijoDerecho());
+            this.setHijoIzquierdo(objetivo.getHijoIzquierdo());
+            this.padre = objetivo.getPadre();
+
+            objetivo.setHijoDerecho(auxiliarDerecho);
+            objetivo.setHijoIzquierdo(auxiliarIzquierdo);
+            objetivo.setPadre(auxiliarPadre);
+        }
+    }
 }

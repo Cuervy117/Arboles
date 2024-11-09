@@ -17,5 +17,20 @@ public class Heap<T> extends ArbolBinario<T>{
         super(clave);
     }
 
-    
+    @Override
+    public void add(Nodo<T> nodo){
+        super.add(nodo);
+        
+    }
+
+    @Override
+    public void delete(Nodo<T> nodo){
+        super.delete(nodo);
+
+    }
+
+    private void heapify(){
+
+    }
+
 }
