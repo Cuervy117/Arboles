@@ -29,10 +29,10 @@ public class Principal {
         arbol.add(nodo7);
         arbol.add(nodo8);
         arbol.add(nodo9);
-        arbol.notPrefija(nodo1);
-        nodo1.nodeSwap(nodo9);
+        arbol.notPrefija(arbol.getRoot());
+        arbol.nodeSwap(nodo8, nodo9);
         System.out.println("intercambio");
-        arbol.notPrefija(nodo9);
+        arbol.notPrefija(arbol.getRoot());
 
     }
 }

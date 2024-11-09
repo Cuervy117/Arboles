@@ -116,4 +116,58 @@ public class ArbolBinario<T> implements Serializable{
             System.out.println(r.getClave());
         }  
     } 
+
+    public void nodeSwap(Nodo<T> origen, Nodo<T> objetivo){
+        Nodo<T> auxDerecho = origen.getHijoDerecho();
+        Nodo<T> auxIzquierdo = origen.getHijoIzquierdo();
+        Nodo<T> auxPadre = origen.getPadre();
+        if (origen.getPadre() == objetivo.getPadre()) {
+             Nodo<T> padre = origen.getPadre(); 
+             if (padre.getHijoDerecho() == origen) {
+                 padre.setHijoDerecho(objetivo); padre.setHijoIzquierdo(origen); 
+            } else { 
+                    padre.setHijoIzquierdo(objetivo); padre.setHijoDerecho(origen); 
+            } 
+        } else if(origen == root){
+            root = objetivo;
+            actualizarPadre(objetivo, origen);
+        } else {
+            
+            actualizarPadre(objetivo, origen);
+            actualizarPadre(origen, objetivo);
+        }
+
+        origen.setHijoDerecho(objetivo.getHijoDerecho());
+        origen.setHijoIzquierdo(objetivo.getHijoIzquierdo());
+        
+        if(objetivo.getHijoDerecho() != null) {
+            objetivo.getHijoDerecho().setPadre(origen);
+        }
+        if(objetivo.getHijoIzquierdo() != null) {
+            objetivo.getHijoIzquierdo().setPadre(origen);
+        }
+
+        origen.setPadre(objetivo.getPadre());
+        
+        objetivo.setHijoDerecho(auxDerecho);
+        objetivo.setHijoIzquierdo(auxIzquierdo);
+
+        if(auxDerecho != null) {
+            auxDerecho.setPadre(objetivo);
+        }
+        if(auxIzquierdo != null) {
+            auxIzquierdo.setPadre(objetivo);
+        }
+        
+        objetivo.setPadre(auxPadre);
+    }
+
+    private void actualizarPadre(Nodo<T> origen, Nodo<T> objetivo){
+        Nodo<T> padre = origen.getPadre();
+        if(padre.getHijoDerecho() == origen){
+            padre.setHijoDerecho(objetivo);
+        } else {
+            padre.setHijoIzquierdo(objetivo);
+        }
+    }
 }
