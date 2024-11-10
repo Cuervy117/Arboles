@@ -22,6 +22,10 @@ public class ArbolBinario<T> implements Serializable{
     public Nodo<T> getRoot(){
         return root;
     }
+
+    public void setRoot(Nodo<T> root){
+        this.root = root;
+    }
     
     public void add(Nodo<T> nodo){
         if(root == null) {
@@ -93,61 +97,76 @@ public class ArbolBinario<T> implements Serializable{
             System.out.println(r.getClave());
         }  
     } 
-
-    public void nodeSwap(Nodo<T> origen, Nodo<T> objetivo){
+    /**
+     * Objetivo necesariamente debe de ser una hoja
+     * @param origen
+     * @param objetivo
+     * @throws Exception
+     */
+    private void nodeSwap(Nodo<T> origen, Nodo<T> objetivo) {
         Nodo<T> auxDerecho = origen.getHijoDerecho();
         Nodo<T> auxIzquierdo = origen.getHijoIzquierdo();
         Nodo<T> auxPadre = origen.getPadre();
-
-        if (origen.getPadre() == objetivo.getPadre()) {
-             Nodo<T> padre = origen.getPadre(); 
-             if (padre.getHijoDerecho() == origen) {
-                 padre.setHijoDerecho(objetivo); padre.setHijoIzquierdo(origen); 
-            } else { 
-                    padre.setHijoIzquierdo(objetivo); padre.setHijoDerecho(origen); 
-            } 
-        } else if(origen == root){
-            root = objetivo;
-            actualizarPadre(objetivo, origen);
-        } else {
-            actualizarPadre(objetivo, origen);
-            actualizarPadre(origen, objetivo);
-        }
-
-        origen.setHijoDerecho(objetivo.getHijoDerecho());
-        origen.setHijoIzquierdo(objetivo.getHijoIzquierdo());
         
-        if(objetivo.getHijoDerecho() != null) {
-            objetivo.getHijoDerecho().setPadre(origen);
-        }
-        if(objetivo.getHijoIzquierdo() != null) {
-            objetivo.getHijoIzquierdo().setPadre(origen);
-        }
+        origen.setHijoDerecho(null);
+        origen.setHijoIzquierdo(null);
+
+        actualizarPadre(objetivo, origen);
+
+        actualizarPadre(origen, objetivo);
 
         origen.setPadre(objetivo.getPadre());
-        
-        objetivo.setHijoDerecho(auxDerecho);
-        objetivo.setHijoIzquierdo(auxIzquierdo);
 
-        if(auxDerecho != null) {
-            auxDerecho.setPadre(objetivo);
+        if(origen == root){
+            setRoot(objetivo);
+            objetivo.setPadre(null);
+        } else {
+            objetivo.setPadre(auxPadre);
         }
-        if(auxIzquierdo != null) {
-            auxIzquierdo.setPadre(objetivo);
+
+        if(objetivo == auxDerecho) {
+            objetivo.setHijoDerecho(origen);
+            objetivo.setHijoIzquierdo(auxIzquierdo);
+
+        } else if(objetivo == auxIzquierdo) {
+            objetivo.setHijoIzquierdo(origen);
+            objetivo.setHijoDerecho(auxDerecho);
+        } else {
+            objetivo.setHijoDerecho(auxDerecho);
+            objetivo.setHijoIzquierdo(auxIzquierdo);
+        }
+
+        if(objetivo.getHijoDerecho() != null){
+            objetivo.getHijoDerecho().setPadre(objetivo);
         }
         
-        objetivo.setPadre(auxPadre);
+        if(objetivo.getHijoIzquierdo() != null){
+            objetivo.getHijoIzquierdo().setPadre(objetivo);
+        }
+
+        if(origen.getHijoDerecho() != null){
+            origen.getHijoDerecho().setPadre(origen);
+        }
+        
+        if(origen.getHijoIzquierdo() != null){
+            origen.getHijoIzquierdo().setPadre(origen);
+        }
+
     }
 
-    private void actualizarPadre(Nodo<T> origen, Nodo<T> objetivo){
+    protected void actualizarPadre(Nodo<T> origen, Nodo<T> objetivo){
         Nodo<T> padre = origen.getPadre();
-        if(padre == null) return;
-        if(padre == objetivo) return;
+
+        if(padre == null || padre == objetivo) {
+            return;
+        }
+
         if(padre.getHijoDerecho() == origen){
             padre.setHijoDerecho(objetivo);
         } else {
             padre.setHijoIzquierdo(objetivo);
         }
+
     }
 
     public Nodo<T> obtenerUltimo(){

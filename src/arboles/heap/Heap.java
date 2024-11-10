@@ -20,33 +20,24 @@ public class Heap<T extends Comparable<T>> extends ArbolBinario<T>{
     @Override
     public void add(Nodo<T> nodo){
         super.add(nodo);
-        minHeapifyUp(nodo);
+
+        while (nodo.getPadre() != null && nodo.getClave().compareTo(nodo.getPadre().getClave()) < 0) {
+            nodeSwapHeap(nodo.getPadre(), nodo);
+        }
     }
 
     @Override
     public void delete(Nodo<T> nodo){
         super.delete(nodo);
-
-    }
-
-    private void minHeapifyUp(Nodo<T> nodo) {
-        Nodo<T> padre = nodo.getPadre();
-        while(padre != null && padre.getClave().compareTo(nodo.getClave()) > 0){
-            nodeSwap(nodo, padre);
-            padre = nodo.getPadre();
-        }
+        minHeapify(root);
     }
 
     private void minHeapify(Nodo<T> r){
-        if(r == null) return;
-        if(r.getHijoIzquierdo() != null){
-            minHeapify(r.getHijoIzquierdo());
-        }
-        if(r.getHijoDerecho() != null) {
-            minHeapify(r.getHijoDerecho());
-        }
+        if(r == null || r.isLeaf()  ) return;
+        
         Nodo<T> der = r.getHijoDerecho();
         Nodo<T> izq = r.getHijoIzquierdo();
+    
         Nodo<T> pequeño = r;
 
         if(izq != null && izq.getClave().compareTo(pequeño.getClave()) < 0) {
@@ -56,8 +47,56 @@ public class Heap<T extends Comparable<T>> extends ArbolBinario<T>{
             pequeño = der;
         }
         if(pequeño != r){
-            nodeSwap(r, pequeño);
+            nodeSwapHeap(r, pequeño);
+            minHeapify(r);
         }
     }
 
+    
+    public void nodeSwapHeap(Nodo<T> origen, Nodo<T> objetivo){
+        Nodo<T> auxDerecho = origen.getHijoDerecho();
+        Nodo<T> auxIzquierdo = origen.getHijoIzquierdo();
+        Nodo<T> auxPadre = origen.getPadre();
+        
+        origen.setHijoDerecho(objetivo.getHijoDerecho());
+        origen.setHijoIzquierdo(objetivo.getHijoIzquierdo());
+
+        actualizarPadre(objetivo, origen);
+
+        actualizarPadre(origen, objetivo);
+
+        origen.setPadre(objetivo);
+
+        if(origen == root){
+            setRoot(objetivo);
+            objetivo.setPadre(null);
+        } else {
+            objetivo.setPadre(auxPadre);
+        }
+
+        if(objetivo == auxDerecho) {
+            objetivo.setHijoDerecho(origen);
+            objetivo.setHijoIzquierdo(auxIzquierdo);
+
+        } else {
+            objetivo.setHijoIzquierdo(origen);
+            objetivo.setHijoDerecho(auxDerecho);
+        }
+
+        if(objetivo.getHijoDerecho() != null){
+            objetivo.getHijoDerecho().setPadre(objetivo);
+        }
+        
+        if(objetivo.getHijoIzquierdo() != null){
+            objetivo.getHijoIzquierdo().setPadre(objetivo);
+        }
+
+        if(origen.getHijoDerecho() != null){
+            origen.getHijoDerecho().setPadre(origen);
+        }
+        
+        if(origen.getHijoIzquierdo() != null){
+            origen.getHijoIzquierdo().setPadre(origen);
+        }
+    }
 }

@@ -11,7 +11,7 @@ import archivos.*;
  * @author David
  */
 public class Principal {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Nodo<Integer> nodo1 = new Nodo<>(12);
         Nodo<Integer> nodo2 = new Nodo<>(5);
         Nodo<Integer> nodo3 = new Nodo<>(11);
@@ -23,25 +23,17 @@ public class Principal {
         Nodo<Integer> nodo9 = new Nodo<>(500);
         Heap<Integer> arbol = new Heap<>(nodo1);
         arbol.add(nodo2);
-        System.out.println("agregado");
         arbol.add(nodo3);
-        System.out.println("agregado");
         arbol.add(nodo4);
-        System.out.println("agregado");
         arbol.add(nodo5);
-        System.out.println("agregado");
         arbol.add(nodo6);
-        System.out.println("agregado");
         arbol.add(nodo7);
-        System.out.println("agregado");
         arbol.add(nodo8);
-        System.out.println("agregado");
         arbol.add(nodo9);
-        System.out.println("agregado");
         arbol.notPrefija(arbol.getRoot());
-        //System.out.println("eliminando 11");
-        //arbol.delete(nodo3);
-        //arbol.notPrefija(arbol.getRoot());
+        arbol.delete(arbol.getRoot());
+        System.out.println("eliminado");
+        arbol.notPrefija(arbol.getRoot());
 
     }
 }
