@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import arboles.AVL.*;
 import arboles.binario.ArbolBinario;
 import arboles.binario.Nodo;
+import arboles.heap.Heap;
 import archivos.*;
 /**
  *
@@ -20,19 +21,27 @@ public class Principal {
         Nodo<Integer> nodo7 = new Nodo<>(40);
         Nodo<Integer> nodo8 = new Nodo<>(50);
         Nodo<Integer> nodo9 = new Nodo<>(500);
-        ArbolBinario<Integer> arbol = new ArbolBinario<>(nodo1);
+        Heap<Integer> arbol = new Heap<>(nodo1);
         arbol.add(nodo2);
+        System.out.println("agregado");
         arbol.add(nodo3);
+        System.out.println("agregado");
         arbol.add(nodo4);
+        System.out.println("agregado");
         arbol.add(nodo5);
+        System.out.println("agregado");
         arbol.add(nodo6);
+        System.out.println("agregado");
         arbol.add(nodo7);
+        System.out.println("agregado");
         arbol.add(nodo8);
+        System.out.println("agregado");
         arbol.add(nodo9);
+        System.out.println("agregado");
         arbol.notPrefija(arbol.getRoot());
-        arbol.nodeSwap(nodo8, nodo9);
-        System.out.println("intercambio");
-        arbol.notPrefija(arbol.getRoot());
+        //System.out.println("eliminando 11");
+        //arbol.delete(nodo3);
+        //arbol.notPrefija(arbol.getRoot());
 
     }
 }

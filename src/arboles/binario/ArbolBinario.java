@@ -29,6 +29,7 @@ public class ArbolBinario<T> implements Serializable{
         } else {
             Nodo<T> auxRoot = root;
             while(true){
+                if(auxRoot == nodo) return;
                 if(auxRoot.getHijoIzquierdo() == null) {
                     auxRoot.setHijoIzquierdo(nodo);
                     nodo.setPadre(auxRoot);
@@ -55,34 +56,10 @@ public class ArbolBinario<T> implements Serializable{
         if(nodo.isLeaf()){
             eliminarHoja(nodo);
         } else {
-            Nodo<T> ultimo = null;
-            Queue<Nodo<T>> nivel = new LinkedList<>();
-            nivel.add(root);
-            while(!nivel.isEmpty()) {
-                ultimo = nivel.poll();
-                if(ultimo.getHijoIzquierdo() != null){
-                    nivel.add(ultimo.getHijoIzquierdo());
-                }
-                if(ultimo.getHijoDerecho() != null){
-                    nivel.add(ultimo.getHijoDerecho());
-                }
-            }
-            
-            if(ultimo == ultimo.getPadre().getHijoIzquierdo()) {
-                ultimo.getPadre().getHijoIzquierdo();
-            } else {
-                ultimo.getPadre().setHijoDerecho(null);
-            }
-
-            if(nodo == nodo.getPadre().getHijoIzquierdo()) {
-                nodo.getPadre().setHijoIzquierdo(ultimo);
-            } else {
-                nodo.getPadre().setHijoDerecho(ultimo);
-            }
-
-            ultimo.setHijoDerecho(nodo.getHijoDerecho());
-            ultimo.setHijoIzquierdo(nodo.getHijoIzquierdo());
-        }  
+            Nodo<T> ultimo = obtenerUltimo();
+            nodeSwap(nodo, ultimo);
+            eliminarHoja(nodo);
+        }
     }
 
     protected void eliminarHoja(Nodo<T> hoja){
@@ -121,6 +98,7 @@ public class ArbolBinario<T> implements Serializable{
         Nodo<T> auxDerecho = origen.getHijoDerecho();
         Nodo<T> auxIzquierdo = origen.getHijoIzquierdo();
         Nodo<T> auxPadre = origen.getPadre();
+
         if (origen.getPadre() == objetivo.getPadre()) {
              Nodo<T> padre = origen.getPadre(); 
              if (padre.getHijoDerecho() == origen) {
@@ -132,7 +110,6 @@ public class ArbolBinario<T> implements Serializable{
             root = objetivo;
             actualizarPadre(objetivo, origen);
         } else {
-            
             actualizarPadre(objetivo, origen);
             actualizarPadre(origen, objetivo);
         }
@@ -164,10 +141,28 @@ public class ArbolBinario<T> implements Serializable{
 
     private void actualizarPadre(Nodo<T> origen, Nodo<T> objetivo){
         Nodo<T> padre = origen.getPadre();
+        if(padre == null) return;
+        if(padre == objetivo) return;
         if(padre.getHijoDerecho() == origen){
             padre.setHijoDerecho(objetivo);
         } else {
             padre.setHijoIzquierdo(objetivo);
         }
+    }
+
+    public Nodo<T> obtenerUltimo(){
+        Nodo<T> ultimo = null;
+        Queue<Nodo<T>> nivel = new LinkedList<>();
+        nivel.add(root);
+        while(!nivel.isEmpty()) {
+            ultimo = nivel.poll();
+            if(ultimo.getHijoIzquierdo() != null){
+                nivel.add(ultimo.getHijoIzquierdo());
+            }
+            if(ultimo.getHijoDerecho() != null){
+                nivel.add(ultimo.getHijoDerecho());
+            }
+        }
+        return ultimo;
     }
 }

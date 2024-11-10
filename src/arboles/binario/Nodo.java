@@ -58,7 +58,7 @@ public class Nodo<T> implements Serializable{
         return (hijoDerecho != null) && (hijoIzquierdo != null) ? true : false;
     }
 
-    public Nodo<T> getReemplazo(){
+    public Nodo<T> getNodoSucesor(){
         if(this.isLeaf()) return null;
         Nodo<T> reemplazo = this.getHijoDerecho();
         if(reemplazo != null){

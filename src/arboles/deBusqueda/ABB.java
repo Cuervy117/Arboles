@@ -52,7 +52,7 @@ public class ABB<T extends Comparable<T>> extends ArbolBinario<T> {
         if(nodo.isLeaf()){ //Caso de nodo Hoja
             eliminarHoja(nodo);
         }else{
-            Nodo<T> reemplazo = nodo.getReemplazo();
+            Nodo<T> reemplazo = nodo.getNodoSucesor();
             //asilamos al reemplazo
             Nodo<T> padreReemplazo = reemplazo.getPadre();
             if(padreReemplazo.getHijoDerecho() == reemplazo) padreReemplazo.setHijoDerecho(null);
