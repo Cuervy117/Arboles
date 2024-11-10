@@ -27,7 +27,8 @@ public class ArbolBinario<T> implements Serializable{
         this.root = root;
     }
     
-    public void add(Nodo<T> nodo){
+    public void add(T clave){
+        Nodo<T> nodo = new Nodo<>(clave);
         if(root == null) {
             root = nodo;
         } else {
@@ -55,13 +56,19 @@ public class ArbolBinario<T> implements Serializable{
         }
     }
 
-    public void delete(Nodo<T> nodo){
+    public void delete(T clave){
         if(root == null) return;
+        Nodo<T> nodo;
+        try{
+            nodo = search(clave);
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
         if(nodo.isLeaf()){
             eliminarHoja(nodo);
         } else {
-            Nodo<T> ultimo = obtenerUltimo();
-            nodeSwap(nodo, ultimo);
+            nodeSwap(nodo, obtenerUltimo());
             eliminarHoja(nodo);
         }
     }
@@ -183,5 +190,35 @@ public class ArbolBinario<T> implements Serializable{
             }
         }
         return ultimo;
+    }
+
+
+    public Nodo<T> search(T clave) throws Exception{
+        if(root == null) return null;
+        Nodo<T> actual = null;
+	    Queue<Nodo<T>> queue = new LinkedList<>();
+        queue.add(root);
+
+        while(!queue.isEmpty()){
+            actual = queue.poll();
+            
+            if(actual.getClave().equals(clave)){
+                return actual;
+            }
+
+            if(actual.getHijoIzquierdo() != null){
+                queue.add(actual.getHijoIzquierdo());
+            }
+
+            if(actual.getHijoDerecho() != null){
+                queue.add(actual.getHijoDerecho());
+            }
+        }
+
+        if(actual == null) {
+            throw new Exception("El nodo con dicho valor no existe");
+        }
+
+        return actual;
     }
 }

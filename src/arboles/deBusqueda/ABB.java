@@ -18,7 +18,8 @@ public class ABB<T extends Comparable<T>> extends ArbolBinario<T> {
     }
 
     @Override
-    public void add(Nodo<T> nodo){
+    public void add(T clave){
+        Nodo<T> nodo = new Nodo<>(clave);
         Nodo<T> rootAux = root;
         if(root == null){
             this.root = nodo;
@@ -48,7 +49,9 @@ public class ABB<T extends Comparable<T>> extends ArbolBinario<T> {
     }
 
     @Override
-    public void delete(Nodo<T> nodo){
+    public void delete(T clave){
+        Nodo<T> nodo;
+        nodo = search(clave);
         if(nodo.isLeaf()){ //Caso de nodo Hoja
             eliminarHoja(nodo);
         }else{
@@ -57,6 +60,7 @@ public class ABB<T extends Comparable<T>> extends ArbolBinario<T> {
             Nodo<T> padreReemplazo = reemplazo.getPadre();
             if(padreReemplazo.getHijoDerecho() == reemplazo) padreReemplazo.setHijoDerecho(null);
             else padreReemplazo.setHijoIzquierdo(null);
+
             //reasignamos los hijos
             reemplazo.setHijoDerecho(nodo.getHijoDerecho());
             reemplazo.setHijoIzquierdo(nodo.getHijoIzquierdo());
@@ -69,6 +73,7 @@ public class ABB<T extends Comparable<T>> extends ArbolBinario<T> {
         }
     }
 
+    @Override
     public Nodo<T> search(T clave){
         Nodo<T> auxRoot = this.root;
         while (auxRoot != null) {
