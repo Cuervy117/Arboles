@@ -17,7 +17,7 @@ public class Nodo {
         return rojo;
     }
 
-    static boolean color(Nodo nodo){
+    public static boolean color(Nodo nodo){
         if(nodo == null){
             return false; // Ya que el false representa el color negro y todos los nodos NULL son negros
         }
@@ -68,18 +68,15 @@ public class Nodo {
     }
 
     public static Nodo getTio(Nodo nodo){
-        try {
-            Nodo tio;
-            if (nodo.getPadre().esHijoIzquierdo()) {
-                tio = nodo.getPadre().getPadre().getDerecha();
-            }else{
-               tio = nodo.getPadre().getPadre().getIzquierda();
-            }
-            return tio;
-        } catch (NullPointerException e) {
-            System.out.println("Error en getTio() con el nodo: "+ nodo.getDato()+ " " + e.getMessage());
-            return null;
+        
+        Nodo tio;
+        if (nodo.getPadre().esHijoIzquierdo()) {
+            tio = nodo.getPadre().getPadre().getDerecha();
+        }else{
+            tio = nodo.getPadre().getPadre().getIzquierda();
         }
+        return tio;
+        
 
     }
 }
