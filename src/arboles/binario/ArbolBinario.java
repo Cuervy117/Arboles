@@ -27,8 +27,7 @@ public class ArbolBinario<T> implements Serializable{
         this.root = root;
     }
     
-    public void add(T clave){
-        Nodo<T> nodo = new Nodo<>(clave);
+    public void add(Nodo<T> nodo){
         if(root == null) {
             root = nodo;
         } else {

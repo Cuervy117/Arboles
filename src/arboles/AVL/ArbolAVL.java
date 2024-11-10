@@ -18,7 +18,8 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T>{
     }
     
     public ArbolAVL(T clave){
-        super(clave);
+        NodeAVL<T> root = new NodeAVL<>(clave);
+        this.root = root;
     }
 
     public ArbolAVL(Nodo<T> root){
@@ -31,7 +32,8 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T>{
 
     @Override
     public void add(T clave){
-        super.add(clave);
+        NodeAVL<T> nodo = new NodeAVL<>(clave);
+        super.add(nodo);
         this.restructuring();
     }
     
