@@ -29,7 +29,13 @@ public class ArbolBinario<T> implements Serializable{
     }
     
     public void add(Nodo<T> nodo){
-        
+        try{
+            search(nodo.getClave());
+            System.out.println("El valor ya se encuentra en el arbol");
+            return;
+        }catch (Exception e){
+
+        }
         if(root == null) {
             root = nodo;
         } else {

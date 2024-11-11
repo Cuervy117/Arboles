@@ -19,6 +19,14 @@ public class ABB<T extends Comparable<T>> extends ArbolBinario<T> {
 
     @Override
     public void add(Nodo<T> nodo){
+
+        try{
+            search(nodo.getClave());
+            System.out.println("El valor ya se encuentra en el arbol");
+            return;
+        }catch (Exception e){
+
+        }
         if(nodo == null) return;
         Nodo<T> rootAux = getRoot();
         
