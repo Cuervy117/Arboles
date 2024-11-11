@@ -43,7 +43,6 @@ public class MenuAritmetico implements Menu{
             }
         } while (opcion != 4);
 
-        scanner.close();
     }
 
     public static void ingresarExpresion(Scanner scanner) {
