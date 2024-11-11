@@ -16,6 +16,7 @@ public class MenuAVL implements Menu {
         System.out.println("6   ----    Salir de Arboles AVL");
     }
 
+    @SuppressWarnings("unchecked")
     public static void ejecutarMenu(Scanner sc){
         try {
             Object objetoLeido = Archivos.leerBaseDeDatos("AVL");

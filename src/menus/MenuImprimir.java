@@ -26,11 +26,11 @@ ArrayList<T> lista = new ArrayList<>();
         }
         switch (opcion) {
             case 1 -> {
-                    ArbolBinario.notInfija(arbol.getRoot(), lista);
+                    ArbolBinario.notPrefija(arbol.getRoot(), lista);
                     System.out.println(lista.toString());
             }
             case 2 -> {
-                    ArbolBinario.notPrefija(arbol.getRoot(), lista);
+                    ArbolBinario.notInfija(arbol.getRoot(), lista);
                     System.out.println(lista.toString());
             }
             case 3 -> {

@@ -1,12 +1,14 @@
 package menus;
 import java.util.Scanner;
-import Redblack.Arbolredblack;
-import Redblack.Nodo;
+
+import arboles.Redblack.Arbolredblack;
+import arboles.Redblack.Nodo;
+
 public class MenuRedBlack implements Menu{
     private Arbolredblack arbol;
 
     public MenuRedBlack() {
-        arbol = new ArbolRedBlack();
+        arbol = new Arbolredblack();
     }
 
     public void ejecutarMenu(Scanner scanner) {
@@ -19,10 +21,10 @@ public class MenuRedBlack implements Menu{
                 case 1 -> insertarNodo(scanner);
                 case 2 -> mostrarArbol();
                 case 3 -> eliminarNodo(scanner);
-                case 0 -> System.out.println("Saliendo del programa...");
+                case 4 -> System.out.println("Saliendo del programa...");
                 default -> System.out.println("Opción no válida. Intente de nuevo.");
             }
-        } while (opcion != 0);
+        } while (opcion != 4);
     }
 
     private void opciones() {

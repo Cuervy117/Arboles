@@ -34,7 +34,7 @@ public class Principal {
                 case 1 -> MenuAritmetico.ejecutarMenu(sc);
                 case 2 -> MenuHeap.ejecutarMenu(sc);
                 case 3 -> MenuAVL.ejecutarMenu(sc);
-                case 4 -> System.out.println("");//Aqui va redblack
+                case 4 -> new MenuRedBlack().ejecutarMenu(sc);//Aqui va redblack
                 case 5 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida.");
             }

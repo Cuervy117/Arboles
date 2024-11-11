@@ -6,8 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-
 import arboles.AVL.*;
 import arboles.aritmetico.ArbolExp;
 import arboles.binario.ArbolBinario;
@@ -15,6 +13,7 @@ import arboles.heap.Heap;
 
 public class Archivos {
 
+    @SuppressWarnings("unchecked")
     public static <T> ArbolBinario<T> leerBaseDeDatos(String ruta){
         try(ObjectInputStream archivo = new ObjectInputStream(new FileInputStream(ruta))){
             ArbolBinario<T> arbol = ((ArbolBinario<T>) archivo.readObject());
@@ -28,6 +27,7 @@ public class Archivos {
         return null;
     }
     
+    @SuppressWarnings("rawtypes")
     public static <T> void guardarDatos(ArbolBinario<T> arbol, String ruta){
         try(ObjectOutputStream archivo = new ObjectOutputStream(new FileOutputStream(ruta))){
             if(arbol instanceof ArbolAVL){

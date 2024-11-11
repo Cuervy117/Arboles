@@ -5,7 +5,6 @@ import archivos.Archivos;
 
 import java.util.Scanner;
 
-import arboles.AVL.ArbolAVL;
 import arboles.binario.Nodo;
 public class MenuHeap implements Menu {
     private static Heap<Integer> arbol;
@@ -18,6 +17,7 @@ public class MenuHeap implements Menu {
         System.out.println("5   ----    Salir de Arboles Heap");
     }
 
+    @SuppressWarnings("unchecked")
     public static void ejecutarMenu(Scanner sc){
         int opcion;
         try {

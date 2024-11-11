@@ -1,4 +1,4 @@
-package Redblack;
+package arboles.Redblack;
 
 public class Arbolredblack extends ArbolBinarioBusqueda{
     public Arbolredblack(){
