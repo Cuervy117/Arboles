@@ -5,6 +5,8 @@
 package principal;
 
 import Redblack.*;
+import java.util.Scanner;
+import menus.*;
 
 /**
  *
@@ -28,7 +30,8 @@ public class Principal {
         Arbolredblack.recorridoPreOrden(rojinegro.getRaiz());
         
         System.out.println("Agregado");
-
+        MenuRedBlack menu = new MenuRedBlack();
+        menu.ejecutarMenu(new Scanner(System.in));
     }
 
 

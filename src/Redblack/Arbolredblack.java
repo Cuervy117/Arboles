@@ -11,10 +11,9 @@ public class Arbolredblack extends ArbolBinarioBusqueda{
     public void insertar(Nodo nodo) {
         // Mientras el nodo padre es rojo, se necesita rebalancear
         añadir(nodo);
-        while (nodo != raiz && nodo.getPadre().esRojo()) {
+        while (nodo != raiz && Nodo.color(nodo.getPadre())) {
             Nodo abuelo = nodo.getPadre().getPadre();
             Nodo tio = Nodo.getTio(nodo);
-
             if (nodo.getPadre().esHijoIzquierdo()) {
                 if (tio != null && tio.esRojo()) { //aso 1: el tío es rojo
                     nodo.getPadre().setColor(false);
