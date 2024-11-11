@@ -29,7 +29,14 @@ public class MenuAritmetico implements Menu{
 
             switch (opcion) {
                 case 1 -> ingresarExpresion(scanner);
-                case 2 -> mostrarArbol();
+                case 2 -> {
+                    if(arbol == null || arbol.getRoot() == null){
+                        System.out.println("Aun no haz creado un arbol de expresion o está vacio, intenta seleccionando la opción 1 primero");
+                        break;
+                    }
+                    System.out.println("Imprimiendo arbol...");
+                    MenuImprimir.ejecutarMenu(scanner, arbol);
+                }
                 case 3 -> resolverExpresion();
                 case 4 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida.");
@@ -47,7 +54,7 @@ public class MenuAritmetico implements Menu{
         System.out.println("Expresión ingresada y árbol construido");
     }
 
-    public static void mostrarArbol() {
+   /*public static void mostrarArbol() {
         if (arbol == null || arbol.getRoot() == null) {
             System.out.println("No se ha ingresado una expresión aún");
             return;
@@ -61,7 +68,7 @@ public class MenuAritmetico implements Menu{
 
         System.out.println("\nÁrbol en notación postfija:");
         arbol.notPostfija(arbol.getRoot());
-    }
+    }*/
 
     public static void resolverExpresion() {
         if (arbol == null || arbol.getRoot() == null) {

@@ -12,6 +12,7 @@ public class Principal {
         menus.MenuHeap.ejecutarMenu(new Scanner(System.in));
 
         menus.MenuAVL.ejecutarMenu(new Scanner(System.in));
-        
+
+        menus.MenuAritmetico.ejecutarMenu(new Scanner(System.in));
     }
 }

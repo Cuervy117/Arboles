@@ -77,27 +77,27 @@ public class ArbolBinario<T> implements Serializable{
         else padre.setHijoDerecho(null);
     }
 
-    public static <T> void notPrefija(Nodo<T> r, ArrayList<Integer> lista) {
+    public static <T> void notPrefija(Nodo<T> r, ArrayList<T> lista) {
         if (r != null) {
-            lista.add((Integer) r.getClave());
+            lista.add(r.getClave());
             notPrefija(r.getHijoIzquierdo(), lista);
             notPrefija(r.getHijoDerecho(), lista);
         }   
     }
 
-    public static <T> void notInfija(Nodo<T> r, ArrayList<Integer> lista) {
+    public static <T> void notInfija(Nodo<T> r, ArrayList<T> lista) {
         if (r != null) {
             notInfija(r.getHijoIzquierdo(), lista);
-            lista.add((Integer) r.getClave());
+            lista.add(r.getClave());
             notInfija(r.getHijoDerecho(), lista);
         }  
     }
 
-    public static <T> void notPostfija(Nodo<T> r, ArrayList<Integer> lista) {
+    public static <T> void notPostfija(Nodo<T> r, ArrayList<T> lista) {
         if (r != null) {
             notPostfija(r.getHijoIzquierdo(), lista);
             notPostfija(r.getHijoDerecho(), lista);
-            lista.add((Integer) r.getClave());
+            lista.add(r.getClave());
         }  
     } 
     /**

@@ -5,8 +5,9 @@ import java.util.Scanner;
 
 import arboles.binario.ArbolBinario;
 
-public class MenuImprimir implements Menu {
-    private static ArrayList<Integer> impresion = new ArrayList<>();
+public class MenuImprimir<T> implements Menu {
+ArrayList<T> lista = new ArrayList<>();
+
 
     private static void opciones(){
         System.out.println("1   ----    Recorrido en PreOrden");
@@ -15,6 +16,7 @@ public class MenuImprimir implements Menu {
     }
 
     public static <T> void ejecutarMenu(Scanner sc, ArbolBinario<T> arbol){
+        ArrayList<T> lista = new ArrayList<>();
         int opcion = 0;
         opciones();
         try{
@@ -24,20 +26,21 @@ public class MenuImprimir implements Menu {
         }
         switch (opcion) {
             case 1 -> {
-                ArbolBinario.notPrefija(arbol.getRoot(), impresion);
-                System.out.println(impresion.toString());
+                    ArbolBinario.notInfija(arbol.getRoot(), lista);
+                    System.out.println(lista.toString());
             }
             case 2 -> {
-                ArbolBinario.notInfija(arbol.getRoot(), impresion);
-                System.out.println(impresion.toString());
-
+                    ArbolBinario.notPrefija(arbol.getRoot(), lista);
+                    System.out.println(lista.toString());
             }
             case 3 -> {
-                ArbolBinario.notPostfija(arbol.getRoot(), impresion);
-                System.out.println(impresion.toString());
 
+                    ArbolBinario.notPostfija(arbol.getRoot(), lista);
+                    System.out.println(lista.toString());
             }
             default -> System.out.println("Opción inválida.");
         }
     }
+
+    
 }
