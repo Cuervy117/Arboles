@@ -9,33 +9,35 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import arboles.AVL.*;
+import arboles.aritmetico.ArbolExp;
+import arboles.binario.ArbolBinario;
+import arboles.heap.Heap;
 
 public class Archivos {
-    @SuppressWarnings("unchecked")
-    public static <T extends Comparable<T>> void leerBaseDeDatos(ArrayList<ArbolAVL<T>> database){
-        ObjectInputStream archivo;
-        ArbolAVL<T> arbol;
-        try{
-            archivo = new ObjectInputStream(new FileInputStream("DataBase"));
-            while(true){
-                arbol = (ArbolAVL<T>) archivo.readObject();
-                System.out.println("Cargando árbol con raíz: " + (arbol.getRoot() != null ? arbol.getRoot().getClave() : "null"));
-                database.add(arbol);
-            }
+
+    public static <T> ArbolBinario<T> leerBaseDeDatos(String ruta){
+        try(ObjectInputStream archivo = new ObjectInputStream(new FileInputStream(ruta))){
+            ArbolBinario<T> arbol = ((ArbolBinario<T>) archivo.readObject());
+            System.out.println("Arbol leido");
+            return arbol;
         }catch(EOFException e){
             System.out.println("Base de datos actualizada");
         }catch(IOException | ClassNotFoundException e){
-            System.out.println(e);
+            System.out.println("No se encontró la base de datos para " + ruta);
         }
+        return null;
     }
     
-    public static <T extends Comparable<T>> void guardarDatos(ArrayList<ArbolAVL<T>> database){
-        ObjectOutputStream archivo;
-        try{
-            archivo = new ObjectOutputStream(new FileOutputStream("DataBase"));
-            for(ArbolAVL<T> e : database){
-                archivo.writeObject(e);
+    public static <T> void guardarDatos(ArbolBinario<T> arbol, String ruta){
+        try(ObjectOutputStream archivo = new ObjectOutputStream(new FileOutputStream(ruta))){
+            if(arbol instanceof ArbolAVL){
+                archivo.writeObject((ArbolAVL) arbol);
+            } else if(arbol instanceof Heap){
+                archivo.writeObject((Heap) arbol);
+            } else if(arbol instanceof ArbolExp){
+                archivo.writeObject((ArbolExp) arbol);
             }
+            System.out.println("Arbol guardado");
         }catch(IOException e){
             System.out.println(e);
         }

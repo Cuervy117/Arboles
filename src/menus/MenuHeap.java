@@ -1,9 +1,11 @@
 package menus;
 
 import arboles.heap.*;
+import archivos.Archivos;
 
 import java.util.Scanner;
 
+import arboles.AVL.ArbolAVL;
 import arboles.binario.Nodo;
 public class MenuHeap implements Menu {
     private static Heap<Integer> arbol;
@@ -18,9 +20,19 @@ public class MenuHeap implements Menu {
 
     public static void ejecutarMenu(Scanner sc){
         int opcion;
-
+        try {
+            Object objetoLeido = Archivos.leerBaseDeDatos("Heap");
+            if (objetoLeido instanceof Heap) {
+                arbol = (Heap<Integer>) objetoLeido;
+            } else {
+                System.out.println("Error: El archivo no contiene un objeto Heap.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al cargar el árbol AVL: " + e.getMessage());
+        }
         do {
             opciones();
+            System.out.println("Ingresa una opcion: ");
             try{
                 opcion = Integer.parseInt(sc.nextLine());
             } catch (Exception e){
@@ -29,8 +41,6 @@ public class MenuHeap implements Menu {
             }
             switch (opcion) {
                 case 1 -> {
-                    System.out.println("Ingresa el valor que tendrá la raiz. " 
-                    + "\nEn caso de querer crear un arbol vació puede dejar el espacio en blanco");
                     if(arbol != null){
                         System.out.println("Estas a punto de sobre-escribir tu antiguo arbol"
                         + "\n¿Quieres proceder? " 
@@ -38,6 +48,9 @@ public class MenuHeap implements Menu {
                         if(sc.nextLine().equals("N")) break;
                     }
                     Integer raiz = null;
+
+                    System.out.println("Ingresa el valor que tendrá la raiz. " 
+                    + "\nEn caso de querer crear un arbol vació puede dejar el espacio en blanco");
 
                     try{
                         raiz = Integer.parseInt(sc.nextLine());
@@ -95,6 +108,6 @@ public class MenuHeap implements Menu {
                 default -> System.out.println("Opción inválida.");
             }
         } while (opcion != 5);
-
+        Archivos.guardarDatos(arbol, "Heap");
     }
 }

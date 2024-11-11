@@ -3,6 +3,7 @@ package menus;
 import java.util.Scanner;
 import arboles.AVL.*;
 import arboles.binario.Nodo;
+import archivos.Archivos;
 public class MenuAVL implements Menu {
     private static ArbolAVL<Integer> arbol;
 
@@ -16,11 +17,20 @@ public class MenuAVL implements Menu {
     }
 
     public static void ejecutarMenu(Scanner sc){
+        try {
+            Object objetoLeido = Archivos.leerBaseDeDatos("AVL");
+            if (objetoLeido instanceof ArbolAVL) {
+                arbol = (ArbolAVL<Integer>) objetoLeido;
+            } else {
+                System.out.println("Error: El archivo no contiene un objeto ArbolAVL.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error al cargar el árbol AVL: " + e.getMessage());
+        }
         int opcion;
-
         do {
-
             opciones();
+            System.out.println("Ingresa una opcion: ");
             try{
                 opcion = Integer.parseInt(sc.nextLine());
             } catch (Exception e){
@@ -29,15 +39,16 @@ public class MenuAVL implements Menu {
             }
             switch (opcion) {
                 case 1 -> {
-                    System.out.println("Ingresa el valor que tendrá la raiz. " 
-                    + "\nEn caso de querer crear un arbol vació puede dejar el espacio en blanco");
                     if(arbol != null){
                         System.out.println("Estas a punto de sobre-escribir tu antiguo arbol"
                         + "\n¿Quieres proceder? " 
                         + "\n[S / N]");
-                        if(sc.nextLine().equals("N")) break;
+                        if(sc.nextLine().equals("N")) 
+                        break;
                     }
                     Integer raiz = null;
+                    System.out.println("Ingresa el valor que tendrá la raiz. " 
+                    + "\nEn caso de querer crear un arbol vació puede dejar el espacio en blanco");
 
                     try{
                         raiz = Integer.parseInt(sc.nextLine());
@@ -117,6 +128,6 @@ public class MenuAVL implements Menu {
                 default -> System.out.println("Opción inválida.");
             }
         } while (opcion != 6);
-
+        Archivos.guardarDatos(arbol, "AVL");
     }
 }
