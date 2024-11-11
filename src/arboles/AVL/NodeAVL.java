@@ -6,7 +6,11 @@ package arboles.AVL;
 
 import arboles.binario.Nodo;
 /**
- *
+ * Clase que representa los nodos propios de un arbol AVL.
+ * Contiene los métodos necesarios para obtener la altura y el factor de equilibrio del propio nodo
+ * Implementación del nodo de un arbol binario común.
+ * 
+ * @param <T> Tipo de dato que contiene el nodo.
  * @author David
  */
 public class NodeAVL<T> extends Nodo<T>{
@@ -19,6 +23,12 @@ public class NodeAVL<T> extends Nodo<T>{
         super(clave);
     }
     
+    /**
+     * Método el cual calcula la altura del nodo sobre el que se llama.
+     * Obtiene recursivamente la altura de los sub-arboles, obteniendo solamente la altura más alta.
+     * En cada iteración recursiva se suma uno, llegando hasta la raiz.
+     * @return  Un valor positivo que representa la altura del arbol dado por el nodo.
+     */
     public int getHeight(){
         if(this.isLeaf()) return 0;
         else{
@@ -29,6 +39,15 @@ public class NodeAVL<T> extends Nodo<T>{
         }
     }
     
+    /**
+     * Método el cual calcula el peso o factor de equilibrio del nodo sobre el que se llama.
+     * Dicho peso se calcula restando la altura del sub-arbol izquierdo al sub-arbol derecho.
+     * 
+     * @return Un valor entero que representa el peso o factor de equilibrio.
+     *         Retorna un valor positivo si el sub-arbol derecho es más alto que el sub-arbol izquierdo.
+     *         Retorna un valor negativo si el sub-arbol izquierdo es más alto que el sub-arbol derecho.
+     *         Retorna 0 si ambos arboles tienen la misma altura. 
+     */
     public int getWeight(){
         NodeAVL<T> pesoHijoDerecho =  (NodeAVL<T>) this.getHijoDerecho();
         NodeAVL<T> pesoHijoIzquierdo =  (NodeAVL<T>) this.getHijoIzquierdo();
