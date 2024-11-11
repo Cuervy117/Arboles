@@ -1,6 +1,7 @@
 package arboles.binario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -28,6 +29,7 @@ public class ArbolBinario<T> implements Serializable{
     }
     
     public void add(Nodo<T> nodo){
+        
         if(root == null) {
             root = nodo;
         } else {
@@ -55,15 +57,10 @@ public class ArbolBinario<T> implements Serializable{
         }
     }
 
-    public void delete(T clave){
+    public void delete(T clave) throws Exception{
         if(root == null) return;
         Nodo<T> nodo;
-        try{
-            nodo = search(clave);
-        } catch(Exception e){
-            System.out.println(e.getMessage());
-            return;
-        }
+        nodo = search(clave);
         if(nodo.isLeaf()){
             eliminarHoja(nodo);
         } else {
@@ -80,27 +77,27 @@ public class ArbolBinario<T> implements Serializable{
         else padre.setHijoDerecho(null);
     }
 
-    public void notPrefija(Nodo<T> r) {
+    public static <T> void notPrefija(Nodo<T> r, ArrayList<Integer> lista) {
         if (r != null) {
-            System.out.println(r.getClave());
-            notPrefija(r.getHijoIzquierdo());
-            notPrefija(r.getHijoDerecho());
+            lista.add((Integer) r.getClave());
+            notPrefija(r.getHijoIzquierdo(), lista);
+            notPrefija(r.getHijoDerecho(), lista);
         }   
     }
 
-    public void notInfija(Nodo<T> r){
+    public static <T> void notInfija(Nodo<T> r, ArrayList<Integer> lista) {
         if (r != null) {
-            notInfija(r.getHijoIzquierdo());
-            System.out.println(r.getClave());
-            notInfija(r.getHijoDerecho());
+            notInfija(r.getHijoIzquierdo(), lista);
+            lista.add((Integer) r.getClave());
+            notInfija(r.getHijoDerecho(), lista);
         }  
     }
 
-    public void notPostfija(Nodo<T> r) {
+    public static <T> void notPostfija(Nodo<T> r, ArrayList<Integer> lista) {
         if (r != null) {
-            notPostfija(r.getHijoIzquierdo());
-            notPostfija(r.getHijoDerecho());
-            System.out.println(r.getClave());
+            notPostfija(r.getHijoIzquierdo(), lista);
+            notPostfija(r.getHijoDerecho(), lista);
+            lista.add((Integer) r.getClave());
         }  
     } 
     /**
@@ -109,7 +106,7 @@ public class ArbolBinario<T> implements Serializable{
      * @param objetivo
      * @throws Exception
      */
-    private void nodeSwap(Nodo<T> origen, Nodo<T> objetivo) {
+    public void nodeSwap(Nodo<T> origen, Nodo<T> objetivo) {
         Nodo<T> auxDerecho = origen.getHijoDerecho();
         Nodo<T> auxIzquierdo = origen.getHijoIzquierdo();
         Nodo<T> auxPadre = origen.getPadre();
@@ -214,10 +211,6 @@ public class ArbolBinario<T> implements Serializable{
             }
         }
 
-        if(actual == null) {
-            throw new Exception("El nodo con dicho valor no existe");
-        }
-
-        return actual;
+        throw new Exception("El nodo con dicho valor no existe");
     }
 }

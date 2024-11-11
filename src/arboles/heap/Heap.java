@@ -18,22 +18,17 @@ public class Heap<T extends Comparable<T>> extends ArbolBinario<T>{
     }
 
     @Override
-    public void add(T clave){
-        super.add(clave);
-        Nodo<T> nodo;
-        try {
-            nodo = search(clave);     
-        } catch (Exception e) {
-            System.out.println("No fue posible agregar el nodo");
-            return;
-        }
+    public void add(Nodo<T> nodo){
+        super.add(nodo);
+
         while (nodo.getPadre() != null && nodo.getClave().compareTo(nodo.getPadre().getClave()) < 0) {
             nodeSwapHeap(nodo.getPadre(), nodo);
         }
+        
     }
 
     @Override
-    public void delete(T clave){
+    public void delete(T clave) throws Exception{
         super.delete(clave);
         minHeapify(root);
     }

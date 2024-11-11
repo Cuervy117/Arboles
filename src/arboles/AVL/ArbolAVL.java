@@ -31,14 +31,13 @@ public class ArbolAVL<T extends Comparable<T>> extends ABB<T>{
     }
 
     @Override
-    public void add(T clave){
-        NodeAVL<T> nodo = new NodeAVL<>(clave);
+    public void add(Nodo<T> nodo){
         super.add(nodo);
         this.restructuring();
     }
     
     @Override
-    public void delete(T clave){
+    public void delete(T clave) throws Exception{
         super.delete(clave);
         this.restructuring();
     }

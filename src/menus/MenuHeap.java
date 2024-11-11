@@ -1,30 +1,30 @@
 package menus;
 
-import java.util.Scanner;
-import arboles.AVL.*;
-import arboles.binario.Nodo;
-public class MenuAVL implements Menu {
-    private static ArbolAVL<Integer> arbol;
+import arboles.heap.*;
 
-    public static void opciones(){
+import java.util.Scanner;
+
+import arboles.binario.Nodo;
+public class MenuHeap implements Menu {
+    private static Heap<Integer> arbol;
+
+    private static void opciones(){
         System.out.println("1   ----    Crear Arbol");
         System.out.println("2   ----    Agregar clave");
         System.out.println("3   ----    Eliminar clave");
-        System.out.println("4   ----    Buscar clave");
-        System.out.println("5   ----    Imprimir arbol");
-        System.out.println("6   ----    Salir de Arboles AVL");
+        System.out.println("4   ----    Imprimir arbol");
+        System.out.println("5   ----    Salir de Arboles Heap");
     }
 
     public static void ejecutarMenu(Scanner sc){
         int opcion;
 
         do {
-
             opciones();
             try{
                 opcion = Integer.parseInt(sc.nextLine());
             } catch (Exception e){
-                System.out.println("Ingresa el número que corresponde a la opción.");
+                System.out.println("Ingresa el número que corresponde a la opción");
                 opcion = 100;
             }
             switch (opcion) {
@@ -41,15 +41,15 @@ public class MenuAVL implements Menu {
 
                     try{
                         raiz = Integer.parseInt(sc.nextLine());
-                        arbol = new ArbolAVL<>(raiz);
+                        arbol = new Heap<>(raiz);
                     }catch (Exception e){
-                        arbol = new ArbolAVL<>();
+                        arbol = new Heap<>();
                     }
                     System.out.println("Arbol de raiz " + raiz + " creado");
                 }
                 case 2 -> {
                     if(arbol == null){
-                        System.out.println("Aun no haz creado un arbol AVL, intenta seleccionando la opción 1 primero");
+                        System.out.println("Aun no haz creado un Heap, intenta seleccionando la opción 1 primero");
                         break;
                     }
                     System.out.println("Ingresa el valor del nodo que deseas agregar");
@@ -57,15 +57,15 @@ public class MenuAVL implements Menu {
                     try{
                         valor = Integer.parseInt(sc.nextLine());
                     }catch (Exception e){
-                        System.out.println("El arbol AVL solo almacena valores númericos enteros, favor de intentar denuevo");
+                        System.out.println("El Heap solo almacena valores númericos enteros, favor de intentar denuevo");
                         break;
                     }
-                    arbol.add(new NodeAVL<>(valor));
+                    arbol.add(new Nodo<>(valor));
                     System.out.println(valor + " agregado con exito");
                 }
                 case 3 -> {
                     if(arbol == null || arbol.getRoot() == null){
-                        System.out.println("Aun no haz creado un arbol AVL o está vacio, intenta seleccionando la opción 1 primero");
+                        System.out.println("Aun no haz creado un Heap o está vacio, intenta seleccionando la opción 1 primero");
                         break;
                     }
                     System.out.println("Ingresa el valor del nodo que deseas eliminar");
@@ -73,50 +73,28 @@ public class MenuAVL implements Menu {
                     try{
                         valor = Integer.parseInt(sc.nextLine());
                     }catch (Exception e){
-                        System.out.println("El arbol AVL solo almacena valores númericos enteros, favor de intentar denuevo");
+                        System.out.println("El Heap AVL solo almacena valores númericos enteros, favor de intentar denuevo");
                         break;
                     }
                     try{
                         arbol.delete(valor);
+                        System.out.println(valor + " eliminado con exito");
                     } catch (Exception e){
                         System.out.println(e.getMessage());
                     }
-                    System.out.println(valor + " eliminado con exito");
                 }
                 case 4 -> {
-                    if(arbol == null){
-                        System.out.println("Aun no haz creado un arbol AVL o está vacio, intenta seleccionando la opción 1 primero");
-                        break;
-                    }
-                    System.out.println("Ingresa el valor del nodo que deseas buscar");
-                    Integer valor;
-                    try{
-                        valor = Integer.parseInt(sc.nextLine());
-                    }catch (Exception e){
-                        System.out.println("El arbol AVL solo almacena valores númericos enteros, favor de intentar denuevo");
-                        break;
-                    }
-                    Nodo<Integer> aBuscar;
-                    try{
-                        aBuscar = arbol.search(valor);
-                        System.out.println("El nodo de valor " + aBuscar.getClave() + " Se encuentra en la altura " + ( (NodeAVL<Integer>) aBuscar).getHeight());
-
-                    } catch (Exception e){
-                        System.out.println(e.getMessage());
-                    }
-                }
-                case 5 -> {
-                    if(arbol == null){
-                        System.out.println("Aun no haz creado un arbol AVL o está vacio, intenta seleccionando la opción 1 primero");
+                    if(arbol == null || arbol.getRoot() == null){
+                        System.out.println("Aun no haz creado un Heap o está vacio, intenta seleccionando la opción 1 primero");
                         break;
                     }
                     System.out.println("Imprimiendo arbol...");
                     MenuImprimir.ejecutarMenu(sc, arbol);
                 }
-                case 6 -> System.out.println("Saliendo...");
+                case 5 -> System.out.println("Saliendo...");
                 default -> System.out.println("Opción inválida.");
             }
-        } while (opcion != 6);
+        } while (opcion != 5);
 
     }
 }
