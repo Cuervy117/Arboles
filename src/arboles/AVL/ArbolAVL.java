@@ -18,20 +18,32 @@ import arboles.deBusqueda.*;
  * @author David
  */
 public class ArbolAVL<T extends Comparable<T>> extends ABB<T>{
-
+    /**
+     * Crea un Arbol AVL con raiz nula.
+     */
     public ArbolAVL(){
         super();
     }
-    
+    /**
+     * Crea un arbol AVL a partir de una clave generica, la raiz de dicho arbol será el nodo generado
+     * a partir de la clave
+     * @param clave Clave del nodo raiz del arbol
+     */
     public ArbolAVL(T clave){
         NodeAVL<T> root = new NodeAVL<>(clave);
         this.root = root;
     }
-
+    /**
+     * Crea un arbol AVL a partir de un nodo, el cual pasará a ser la raiz del propio arbol
+     * @param root
+     */
     public ArbolAVL(Nodo<T> root){
         super(root);
     }
-    
+    /**
+     * Realiza un casteo sobre la raiz del arbol para trabajar con ella como si de un nodo AVL se tratará 
+     * @return
+     */
     public NodeAVL<T> getAVLRoot(){
         return (NodeAVL<T>) root;
     }
