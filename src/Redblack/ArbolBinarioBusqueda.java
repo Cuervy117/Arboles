@@ -9,7 +9,7 @@ public class ArbolBinarioBusqueda {
         this.raiz = null;
     }
 
-    public void añadir(Nodo nodo){
+    protected void añadir(Nodo nodo){
         Nodo rootAux = raiz;
         if(raiz == null){
             this.raiz = nodo;
