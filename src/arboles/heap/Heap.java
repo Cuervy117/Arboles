@@ -3,18 +3,34 @@ package arboles.heap;
 import arboles.binario.ArbolBinario;
 import arboles.binario.Nodo;
 /**
- * Clase que representa un arbol del tipo min-heap
+ * Clase que representa un arbol del tipo min-heap.
+ * Extención de un arbol binario, contiene los métodos de inserción y eliminación que cumplen
+ * con las condiciones de un min-heap.
+ * 
+ * Estas condiciones son:
+ * 1.- Cada nodo se debe de insertar en posición consiguiente al ultimo nodo insertado, es decir, la
+ * inserción se realiza llenando cada nivel primero por la izquierda hasta terminar con la derecha antes de crear 
+ * un nuevo nivel.
+ * 2.- Cada nodo padre debe de tener una clave menor a la de sus nodos hijos.
  */
 public class Heap<T extends Comparable<T>> extends ArbolBinario<T>{
-    
+    /**
+     * Constructor de un heap vacio, con raiz nula
+     */
     public Heap(){
         super();
     }
-
+    /**
+     * Constructor de un heap con raiz no nula
+     * @param nodo la raiz que asumirá el nuevo heap
+     */
     public Heap(Nodo<T> nodo){
         super(nodo);
     }
-
+    /**
+     * Constructor de un Heap con raiz no nula
+     * @param clave Valor que tomará la raiz
+     */
     public Heap(T clave){
         super(clave);
     }

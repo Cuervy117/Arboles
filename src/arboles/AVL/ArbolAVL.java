@@ -12,7 +12,7 @@ import arboles.deBusqueda.*;
  * Contiene los métodos necesarios para la inserción y eliminación de nodos.
  * Contiene los métodos necesarios para el balanceo del arbol mediante rotaciones simples y dobles. 
  * 
- * Implementación de un arbol binario de búsqueda. 
+ * Extención de un arbol binario de búsqueda. 
  * @param <T> El tipo de dato que contienen los nodos del arbol, para su correcto funcionamiento es necesario que el dato
  *            implemente la interfaz "Comparable".
  * @author David

@@ -14,11 +14,16 @@ import arboles.binario.Nodo;
  * @author David
  */
 public class NodeAVL<T> extends Nodo<T>{
-    
+    /**
+     * Constructor vacio
+     */
     public NodeAVL(){
         super();
     }
-    
+    /**
+     * Constructor con el cual se crea una instancia del tipo NodeAVL con una clave especifica.
+     * @param clave La clave que se desea tenga el nodo a crear.
+     */
     public NodeAVL(T clave){
         super(clave);
     }

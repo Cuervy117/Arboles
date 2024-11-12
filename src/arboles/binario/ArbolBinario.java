@@ -196,7 +196,7 @@ public class ArbolBinario<T> implements Serializable{
 
 
     public Nodo<T> search(T clave) throws Exception{
-        if(root == null) return null;
+        if(root == null) throw new Exception("El nodo con dicho valor no existe");
         Nodo<T> actual = null;
 	    Queue<Nodo<T>> queue = new LinkedList<>();
         queue.add(root);

@@ -2,7 +2,16 @@ package arboles.deBusqueda;
 
 import arboles.binario.ArbolBinario;
 import arboles.binario.Nodo;
-
+/**
+ * Clase que representa un arbol binario de busqueda.
+ * Esta clase extiende de un arbolBinario generico. 
+ * Dicho valor generico debe tener forzosamente el método "compareTo" para un correcto funcionamiento
+ * 
+ * Contiene métodos escenciales para la inserción, siguiendo la propiedad de los ABB donde su sub-arbol izquierdo
+ * siempre contiene valores menor a la raiz y su sub-arbol derecho siempre contiene valores mayor a la raiz.
+ * 
+ * Contiene métodos escenciales para el borrado de nodos, manteniendo las propiedades del arbol binario
+ */
 public class ABB<T extends Comparable<T>> extends ArbolBinario<T> {
 
     public ABB(){
@@ -62,19 +71,34 @@ public class ABB<T extends Comparable<T>> extends ArbolBinario<T> {
     public void delete(T clave) throws Exception{
         if(root == null) return;
         Nodo<T> nodo;
+        Nodo<T> nodoSucesor;
         nodo = search(clave);
+        Nodo<T> nodoAux = nodo;
         if(nodo.isLeaf()){
             eliminarHoja(nodo);
         } else {
-            nodeSwap(nodo, nodo.getNodoSucesor());
-            eliminarHoja(nodo);
+            while(true){
+                nodoSucesor = nodo.getNodoSucesor();
+                if(nodoSucesor.getHijoDerecho() != null){
+                    nodoAux = nodoSucesor.getHijoDerecho();
+                    nodeSwap(nodo, nodoSucesor);
+                    nodo.setHijoDerecho(nodoAux);
+                } else if(nodoSucesor.getHijoIzquierdo() != null){
+                    nodoAux = nodoSucesor.getHijoIzquierdo();
+                    nodeSwap(nodo, nodoSucesor);
+                    nodo.setHijoIzquierdo(nodoAux);
+                } else if(nodoSucesor.isLeaf()) {
+                    nodeSwap(nodo, nodoSucesor);
+                    eliminarHoja(nodo);
+                    break;
+                }
+            }
         }
     }
 
     @Override
     public Nodo<T> search(T clave) throws Exception{
         Nodo<T> auxRoot = this.root;
-
         while (auxRoot != null) {
             int comparacion = auxRoot.getClave().compareTo(clave);
             if(comparacion == 0) return auxRoot;
