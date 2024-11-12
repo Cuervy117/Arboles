@@ -4,30 +4,56 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
-
+/**
+ * Clase de un árbol binario.
+ * @param <T> el tipo de dato requerido para el árbol
+ */
 public class ArbolBinario<T> implements Serializable{
     protected Nodo<T> root;
-
+    
+    /**
+     * Constructor vacío.
+     */
     public ArbolBinario(){
 
     }
-
+    
+    /**
+     * Constructor que inicializa con una clave en la raíz.
+     * @param clave el valor de la raíz
+     */
     public ArbolBinario(T clave){
         root = new Nodo<T>(clave);
     }
     
+    /**
+     * Constructor que inicializa con un nodo raíz.
+     * @param root el nodo raíz del árbol
+     */
     public ArbolBinario(Nodo<T> root){
         this.root = root;
     }
 
+    /**
+     * Obtiene la raíz del árbol.
+     * @return el nodo raíz
+     */
     public Nodo<T> getRoot(){
         return root;
     }
-
+    
+    /**
+     * Establece la raíz del árbol.
+     * @param root el nodo que se define como raíz
+     */
     public void setRoot(Nodo<T> root){
         this.root = root;
     }
     
+    /**
+     * Agrega un nodo al árbol.
+     * @param nodo el nodo agregado
+     */
     public void add(Nodo<T> nodo){
         try{
             search(nodo.getClave());
@@ -63,6 +89,11 @@ public class ArbolBinario<T> implements Serializable{
         }
     }
 
+    /**
+     * Elimina un nodo del árbol con una clave específica.
+     * @param clave el valor del nodo eliminado
+     * @throws Exception si el nodo no existe en el árbol
+     */
     public void delete(T clave) throws Exception{
         if(root == null) return;
         Nodo<T> nodo;
@@ -74,7 +105,11 @@ public class ArbolBinario<T> implements Serializable{
             eliminarHoja(nodo);
         }
     }
-
+    
+    /**
+     * Elimina un nodo hoja indicado del árbol.
+     * @param hoja el nodo hoja eliminado
+     */
     protected void eliminarHoja(Nodo<T> hoja){
         if(!hoja.isLeaf()) return;
         Nodo<T> padre = hoja.getPadre();
@@ -83,6 +118,11 @@ public class ArbolBinario<T> implements Serializable{
         else padre.setHijoDerecho(null);
     }
 
+    /**
+     * Realiza el recorrido preorden y guarda las claves en una lista.
+     * @param r el nodo incial del recorrido
+     * @param lista la lista donde se guardan las claves
+     */
     public static <T> void notPrefija(Nodo<T> r, ArrayList<T> lista) {
         if (r != null) {
             lista.add(r.getClave());
@@ -91,6 +131,11 @@ public class ArbolBinario<T> implements Serializable{
         }   
     }
 
+    /**
+     * Realiza el recorrido inorden y guarda las claves en una lista.
+     * @param r el nodo incial del recorrido
+     * @param lista la lista donde se guardan las claves
+     */
     public static <T> void notInfija(Nodo<T> r, ArrayList<T> lista) {
         if (r != null) {
             notInfija(r.getHijoIzquierdo(), lista);
@@ -99,6 +144,11 @@ public class ArbolBinario<T> implements Serializable{
         }  
     }
 
+    /**
+     * Realiza el recorrido postorden y guarda las claves en una lista.
+     * @param r el nodo incial del recorrido
+     * @param lista la lista donde se guardan las claves
+     */
     public static <T> void notPostfija(Nodo<T> r, ArrayList<T> lista) {
         if (r != null) {
             notPostfija(r.getHijoIzquierdo(), lista);
@@ -107,10 +157,9 @@ public class ArbolBinario<T> implements Serializable{
         }  
     } 
     /**
-     * Objetivo necesariamente debe de ser una hoja
-     * @param origen
-     * @param objetivo
-     * @throws Exception
+     * Intercambia la posición de dos nodos.
+     * @param origen el nodo a intercambiar
+     * @param objetivo el nodo hoja que reemplazará al origen
      */
     public void nodeSwap(Nodo<T> origen, Nodo<T> objetivo) {
         Nodo<T> auxDerecho = origen.getHijoDerecho();
@@ -163,6 +212,11 @@ public class ArbolBinario<T> implements Serializable{
 
     }
 
+    /**
+     * Actualiza el padre de un nodo en el árbol.
+     * @param origen el nodo original
+     * @param objetivo el nodo que reemplazará al origen
+     */
     protected void actualizarPadre(Nodo<T> origen, Nodo<T> objetivo){
         Nodo<T> padre = origen.getPadre();
 
@@ -178,6 +232,10 @@ public class ArbolBinario<T> implements Serializable{
 
     }
 
+    /**
+     * Obtiene el último nodo agregado al árbol en un recorrido por niveles.
+     * @return el último nodo encontrado
+     */
     public Nodo<T> obtenerUltimo(){
         Nodo<T> ultimo = null;
         Queue<Nodo<T>> nivel = new LinkedList<>();
@@ -195,6 +253,12 @@ public class ArbolBinario<T> implements Serializable{
     }
 
 
+    /**
+     * Busca un nodo en el árbol que contenga la clave indicada.
+     * @param clave el valor del nodo a buscar
+     * @return el nodo que contiene la clave
+     * @throws Exception si el nodo no existe en el árbol
+     */
     public Nodo<T> search(T clave) throws Exception{
         if(root == null) throw new Exception("El nodo con dicho valor no existe");
         Nodo<T> actual = null;
