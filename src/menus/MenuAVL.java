@@ -133,7 +133,7 @@ public class MenuAVL implements Menu {
                     Nodo<Integer> aBuscar;
                     try{
                         aBuscar = arbol.search(valor);
-                        System.out.println("El nodo de valor " + aBuscar.getClave() + " Se encuentra en la altura " + ( (NodeAVL<Integer>) aBuscar).getHeight());
+                        System.out.println("El nodo de valor " + aBuscar.getClave() + " si se encuentra en el arbol");
 
                     } catch (Exception e){
                         System.out.println(e.getMessage());
