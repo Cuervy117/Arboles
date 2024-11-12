@@ -6,15 +6,28 @@ import java.util.Scanner;
 import arboles.binario.ArbolBinario;
 
 public class MenuImprimir<T> implements Menu {
-ArrayList<T> lista = new ArrayList<>();
+    /**
+     * Lista de valores genericos que almacena los valores de un arbol en cierta notación para su posterior
+     * impresión.
+     */
+    ArrayList<T> lista = new ArrayList<>();
 
-
+        /**
+     * Método que imprime en pantalla todas las posibles opciones en este menú
+     */
     private static void opciones(){
         System.out.println("1   ----    Recorrido en PreOrden");
         System.out.println("2   ----    Recorrido en InOrden");
         System.out.println("3   ----    Recorrido en PostOrden");
     }
 
+    /**
+     * Método el cual se encarga de la lectura de la opcion requerida por el usuario, posterior a la elección se 
+     * ejecutará uno u otro algoritmo de notación del arbol. 
+     * @param <T> Tipo generico del arbol a trabajar en cuestion.
+     * @param sc Objeto de tipo Scanner para la lectura de las opciones mediante la consola.
+     * @param arbol Arbol binario sobre el cual se realizará el recorrido para su impresión.
+     */
     public static <T> void ejecutarMenu(Scanner sc, ArbolBinario<T> arbol){
         ArrayList<T> lista = new ArrayList<>();
         int opcion = 0;

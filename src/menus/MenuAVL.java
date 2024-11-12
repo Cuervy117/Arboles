@@ -4,9 +4,20 @@ import java.util.Scanner;
 import arboles.AVL.*;
 import arboles.binario.Nodo;
 import archivos.Archivos;
+/**
+ * Clase que funciona para desplegar y navegar entre opciones que corresponden al funcionamiento de un 
+ * arbol AVL
+ * Implementa la interfaz Menu
+ */
 public class MenuAVL implements Menu {
+    /**
+     * Arbol AVL sobre el cual se realizarán las opciones seleccionadas por el usuario.
+     */
     private static ArbolAVL<Integer> arbol;
 
+    /**
+     * Método que imprime en pantalla todas las posibles opciones en este menú
+     */
     public static void opciones(){
         System.out.println("1   ----    Crear Arbol");
         System.out.println("2   ----    Agregar clave");
@@ -16,6 +27,17 @@ public class MenuAVL implements Menu {
         System.out.println("6   ----    Salir de Arboles AVL");
     }
 
+    /**
+     * Método el cual recupera si es posible el arbol contenido en el archivo "AVL" para trabajar sobre datos 
+     * ya almacenados.
+     * 
+     * Posterior a la recuperación, se encarga de la lectura de opciones por parte del usuario, ejecutando el
+     * algoritmo que corresponde a dicha opcion, esto ocurre indefinidamente mientras que el usuario no decida salir del menú 
+     * 
+     * Al terminar su ejecución guardará, en el mismo archivo de donde recuperó los datos, el arbol sobre el cual se trabajó durante 
+     * la ejecución, guardando los cambios para una futura ejecución.
+     * @param sc objeto de tipo Scanner para la lectura de datos mediante la consola.
+     */
     @SuppressWarnings("unchecked")
     public static void ejecutarMenu(Scanner sc){
         try {

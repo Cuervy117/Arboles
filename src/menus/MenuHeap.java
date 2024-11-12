@@ -7,8 +7,13 @@ import java.util.Scanner;
 
 import arboles.binario.Nodo;
 public class MenuHeap implements Menu {
+    /**
+     * Heap sobre el cual se realizarán las opciones seleccionadas por el usuario.
+     */
     private static Heap<Integer> arbol;
-
+    /**
+     * Método que imprime en pantalla todas las posibles opciones en este menú
+     */
     private static void opciones(){
         System.out.println("1   ----    Crear Arbol");
         System.out.println("2   ----    Agregar clave");
@@ -16,7 +21,17 @@ public class MenuHeap implements Menu {
         System.out.println("4   ----    Imprimir arbol");
         System.out.println("5   ----    Salir de Arboles Heap");
     }
-
+    /**
+     * Método el cual recupera si es posible el arbol contenido en el archivo "Heap" para trabajar sobre datos 
+     * ya almacenados.
+     * 
+     * Posterior a la recuperación, se encarga de la lectura de opciones por parte del usuario, ejecutando el
+     * algoritmo que corresponde a dicha opcion, esto ocurre indefinidamente mientras que el usuario no decida salir del menú 
+     * 
+     * Al terminar su ejecución guardará, en el mismo archivo de donde recuperó los datos, el arbol sobre el cual se trabajó durante 
+     * la ejecución, guardando los cambios para una futura ejecución.
+     * @param sc objeto de tipo Scanner para la lectura de datos mediante la consola.
+     */
     @SuppressWarnings("unchecked")
     public static void ejecutarMenu(Scanner sc){
         int opcion;

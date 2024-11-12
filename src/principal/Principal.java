@@ -9,7 +9,11 @@ import java.util.Scanner;
 import menus.*;
 
 /**
- *
+ * Programa el cual nos ofrece la posibilidad de trabajar con 4 tipos de arbol binario, cada uno con su forma de
+ * trabajar distinta, desplegando menús personalizados para cada caso.
+ * 
+ * Este programa nos permite verificar el funcionamiento de distintas implementaciones de los arboles binarios.
+ * 
  * @author David
  */
 public class Principal {
