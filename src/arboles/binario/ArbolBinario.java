@@ -120,40 +120,40 @@ public class ArbolBinario<T> implements Serializable{
 
     /**
      * Realiza el recorrido preorden y guarda las claves en una lista.
-     * @param r el nodo incial del recorrido
+     * @param nodo el nodo incial del recorrido
      * @param lista la lista donde se guardan las claves
      */
-    public static <T> void notPrefija(Nodo<T> r, ArrayList<T> lista) {
-        if (r != null) {
-            lista.add(r.getClave());
-            notPrefija(r.getHijoIzquierdo(), lista);
-            notPrefija(r.getHijoDerecho(), lista);
+    public static <T> void notPrefija(Nodo<T> nodo, ArrayList<T> lista) {
+        if (nodo != null) {
+            lista.add(nodo.getClave());
+            notPrefija(nodo.getHijoIzquierdo(), lista);
+            notPrefija(nodo.getHijoDerecho(), lista);
         }   
     }
 
     /**
      * Realiza el recorrido inorden y guarda las claves en una lista.
-     * @param r el nodo incial del recorrido
+     * @param nodo el nodo incial del recorrido
      * @param lista la lista donde se guardan las claves
      */
-    public static <T> void notInfija(Nodo<T> r, ArrayList<T> lista) {
-        if (r != null) {
-            notInfija(r.getHijoIzquierdo(), lista);
-            lista.add(r.getClave());
-            notInfija(r.getHijoDerecho(), lista);
+    public static <T> void notInfija(Nodo<T> nodo, ArrayList<T> lista) {
+        if (nodo != null) {
+            notInfija(nodo.getHijoIzquierdo(), lista);
+            lista.add(nodo.getClave());
+            notInfija(nodo.getHijoDerecho(), lista);
         }  
     }
 
     /**
      * Realiza el recorrido postorden y guarda las claves en una lista.
-     * @param r el nodo incial del recorrido
+     * @param nodo el nodo incial del recorrido
      * @param lista la lista donde se guardan las claves
      */
-    public static <T> void notPostfija(Nodo<T> r, ArrayList<T> lista) {
-        if (r != null) {
-            notPostfija(r.getHijoIzquierdo(), lista);
-            notPostfija(r.getHijoDerecho(), lista);
-            lista.add(r.getClave());
+    public static <T> void notPostfija(Nodo<T> nodo, ArrayList<T> lista) {
+        if (nodo != null) {
+            notPostfija(nodo.getHijoIzquierdo(), lista);
+            notPostfija(nodo.getHijoDerecho(), lista);
+            lista.add(nodo.getClave());
         }  
     } 
     /**
