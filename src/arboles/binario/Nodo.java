@@ -130,4 +130,9 @@ public class Nodo<T> implements Serializable{
         }
     }
 
+    public boolean esRojo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'esRojo'");
+    }
+
 }

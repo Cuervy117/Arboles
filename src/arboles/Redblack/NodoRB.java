@@ -32,6 +32,27 @@ public class NodoRB<T extends Comparable<T>> extends Nodo<T> {
     public boolean esNegro() {
         return !esRojo;
     }
+
+        public Nodo<T> getNodoSucesor() {
+        // Si tiene un hijo derecho, el sucesor es el nodo más a la izquierda en el subárbol derecho
+        if (this.getHijoDerecho() != null) {
+            Nodo<T> nodo = this.getHijoDerecho();
+            while (nodo.getHijoIzquierdo() != null) {
+                nodo = nodo.getHijoIzquierdo();
+            }
+            return nodo;
+        }
+        // Si no tiene hijo derecho, el sucesor es el primer ancestro cuya clave es mayor que la del nodo
+        Nodo<T> nodo = this;
+        while (nodo.getPadre() != null && nodo == nodo.getPadre().getHijoDerecho()) {
+            nodo = nodo.getPadre();
+        }
+        return nodo.getPadre();
+    }
+
+    void setColor(boolean esRojo) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
 
 
